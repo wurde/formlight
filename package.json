@@ -4,7 +4,9 @@
   "description": "A lightweight Form Builder web app using Vue.js.",
   "private": true,
   "scripts": {
-    "start": "npm serve --prefix client"
+    "client:serve": "npm run serve --prefix client",
+    "client:build": "npm run build --prefix client",
+    "client:lint": "npm run lint --prefix client"
   },
   "author": "Andy Bettisworth",
   "license": "MIT",
