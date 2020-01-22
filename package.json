@@ -1,0 +1,14 @@
+{
+  "name": "formlight",
+  "version": "0.1.0",
+  "description": "A lightweight Form Builder web app using Vue.js.",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Andy Bettisworth",
+  "license": "MIT",
+  "dependencies": {
+    "vue": "^2.6.10"
+  }
+}
