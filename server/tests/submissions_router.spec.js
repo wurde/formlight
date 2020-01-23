@@ -7,6 +7,7 @@
 const app = require('../index');
 const request = require('supertest');
 const Submission = require('../models/Submission');
+const Form = require('../models/Form');
 
 /**
  * Assertions
@@ -14,14 +15,20 @@ const Submission = require('../models/Submission');
 
 describe('submissions_router.js', () => {
   beforeEach(async () => {
+    await Form.clearAll();
+    await Form.create({
+      title: "SigninForm",
+      fields_json: '[{"label":"username"},{"label":"password"}]'
+    });
+
     await Submission.clearAll();
     await Submission.create({
-      form_title: "Signin Form",
+      form_title: "SigninForm",
       fields_json: '[{"label":"username"},{"label":"password"}]',
       answers_json: '[{"username":"admin"},{"password":"secret"}]',
     });
     await Submission.create({
-      form_title: "Signin Form",
+      form_title: "SigninForm",
       fields_json: '[{"label":"username"},{"label":"password"}]',
       answers_json: '[{"username":"andy"},{"password":"test-1-2-3"}]',
     });

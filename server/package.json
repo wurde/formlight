@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "start:watch": "nodemon index.js",
-    "test": "cross-env NODE_ENV=test jest",
-    "test:watch": "cross-env NODE_ENV=test jest --watch",
-    "test:cov": "cross-env NODE_ENV=test jest --coverage"
+    "test": "cross-env NODE_ENV=test jest -i",
+    "test:watch": "cross-env NODE_ENV=test jest -i --watch",
+    "test:cov": "cross-env NODE_ENV=test jest -i --coverage"
   },
   "author": "Andy Bettisworth",
   "license": "MIT",

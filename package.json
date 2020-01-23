@@ -4,7 +4,7 @@
   "description": "A lightweight Form Builder web app using Vue.js.",
   "private": true,
   "scripts": {
-    "test": "concurrently 'npm test --prefix client' && 'npm test --prefix client'",
+    "test": "npm test --prefix server && npm test --prefix client",
     "server:start": "npm run start --prefix server",
     "server:start:watch": "npm run start:watch --prefix server",
     "client:serve": "npm run serve --prefix client",
