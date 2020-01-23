@@ -7,39 +7,45 @@
 const db = require('../db/client');
 
 /**
+ * Constants
+ */
+
+const table = 'forms';
+
+/**
  * Define model
  */
 
 class Form {
   static all() {
-    return db("forms");
+    return db(table);
   }
 
   static create(params) {
-    return db("forms").insert(params);
+    return db(table).insert(params);
   }
 
   static find(id) {
-    return db("forms")
+    return db(table)
       .where({ id })
       .first();
   }
 
   static update(id, params) {
-    return db("forms")
+    return db(table)
       .where({ id })
       .first()
       .update(params);
   }
 
-  static remove(id) {
-    return db("forms")
+  static destroy(id) {
+    return db(table)
       .where({ id })
       .del();
   }
 
   static clearAll() {
-    return db("forms").del();
+    return db(table).truncate();
   }
 }
 

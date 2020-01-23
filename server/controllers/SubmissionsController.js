@@ -25,7 +25,7 @@ class SubmissionsController {
     }
   }
 
-  static async find(req, res) {
+  static async show(req, res) {
     try {
       res.sendStatus(200);
     } catch (err) {

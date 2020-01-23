@@ -15,6 +15,10 @@ const Form = require('../models/Form');
 describe('forms_router.js', () => {
   beforeEach(async () => {
     await Form.clearAll()
+    await Form.create({ title: 'TestFormHook1' })
+    await Form.create({ title: 'TestFormHook2' })
+    await Form.create({ title: 'TestFormHook3' })
+    await Form.create({ title: 'TestFormHook4' })
   })
 
   it("process.env.NODE_ENV == 'test'", () => {
@@ -38,11 +42,15 @@ describe('forms_router.js', () => {
 
   it("POST /forms", () => {
     return request(app).post('/forms')
-      .send({ title: 'TestForm' }).expect(200)
+      .send({ title: 'TestFormAdded' }).expect(200)
   })
 
   it("GET /forms/:id", () => {
     return request(app).get('/forms/1').expect(200)
+  })
+
+  it("GET /forms/:id - not found", () => {
+    return request(app).get('/forms/5').expect(404)
   })
 
   it("PUT /forms/:id", () => {

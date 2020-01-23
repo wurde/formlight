@@ -7,28 +7,45 @@
 const db = require('../db/client');
 
 /**
+ * Constants
+ */
+
+const table = 'submissions';
+
+/**
  * Define model
  */
 
 class Submission {
   static all() {
-    return db("submissions");
+    return db(table);
   }
 
   static create(params) {
-    return db("submissions").insert(params);
+    return db(table).insert(params);
   }
 
   static find(id) {
-    return db("submissions").where({ id }).first();
+    return db(table)
+      .where({ id })
+      .first();
   }
 
   static update(id, params) {
-    return db("submissions").where({ id }).first().update(params);
+    return db(table)
+      .where({ id })
+      .first()
+      .update(params);
   }
 
-  static remove(id) {
-    return db("submissions").where({ id }).del();
+  static destroy(id) {
+    return db(table)
+      .where({ id })
+      .del();
+  }
+
+  static clearAll() {
+    return db(table).truncate();
   }
 }
 

@@ -33,9 +33,10 @@ class FormsController {
     }
   }
 
-  static async find(req, res) {
+  static async show(req, res) {
     try {
-      res.sendStatus(200);
+      const form = await Form.find(req.params.id);
+      res.status(200).json(form);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
@@ -44,7 +45,15 @@ class FormsController {
 
   static async update(req, res) {
     try {
-      res.sendStatus(200);
+      if (req.body.fields_json) {
+        const [id] = await Form.update(req.params.id, {
+          fields_json: req.body.fields_json
+        });
+      }
+
+      const form = await Form.find(req.params.id);
+
+      res.status(200).json(form);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
@@ -53,7 +62,8 @@ class FormsController {
 
   static async remove(req, res) {
     try {
-      res.sendStatus(200);
+      await Form.destroy(req.params.id);
+      res.sendStatus(200).json();
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
