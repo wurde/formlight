@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="header">
     <i v-show="isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-file-alt icon"></i>
     <i v-show="!isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-edit icon"></i>
   </div>
@@ -31,5 +31,12 @@ export default {
 
 .icon:hover {
   text-shadow: 0 5px 30px #BBB;
+}
+
+.header {
+  max-width: 80%;
+  margin: 0 auto;
+  border: 1px solid red;
+  text-align: right;
 }
 </style>
