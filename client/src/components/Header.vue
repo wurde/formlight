@@ -1,21 +1,28 @@
 <template>
   <div>
-    <i class="fas fa-edit"></i>
-    <input v-if="currentView == 'editing'" type="radio" name="current-view" value="editing" checked />
-    <input v-if="currentView == 'submission'" type="radio" name="current-view" value="submission" />
+    <i v-if="currentView == 'editing'" v-on:click="toggleView" class="fas fa-edit icon"></i>
+    <i v-if="currentView == 'submission'" v-on:click="toggleView" class="fas fa-file-alt icon"></i>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
-  data: () => {
+  data: function() {
     return {
       currentView: 'editing'
+    }
+  },
+  methods: {
+    toggleView: function() {
+      this.currentView = this.currentView == 'editing' ? 'submission' : 'editing'
     }
   }
 }
 </script>
 
 <style scoped>
+.icon {
+  font-size: 32px;
+}
 </style>
