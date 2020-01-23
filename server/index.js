@@ -50,3 +50,9 @@ if (module === require.main) {
     console.log(`Express server running on port ${port}`);
   })
 }
+
+/**
+ * Export app
+ */
+
+module.exports = app;
