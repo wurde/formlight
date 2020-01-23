@@ -21,5 +21,10 @@ export default {
 a {
   text-decoration: underline;
   cursor: pointer;
+  padding: 10px 16px;
+}
+
+a:hover {
+  text-shadow: 0 5px 30px #EEC480;
 }
 </style>
