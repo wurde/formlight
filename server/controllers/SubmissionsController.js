@@ -1,6 +1,7 @@
 'use strict';
 
 const Submission = require("../models/Submission");
+const Form = require("../models/Form");
 
 /**
  * Define controller
@@ -9,7 +10,9 @@ const Submission = require("../models/Submission");
 class SubmissionsController {
   static async index(req, res) {
     try {
-      res.sendStatus(200);
+      const form = await Form.find(req.params.form_id);
+      const submissions = await Submission.all(form.title);
+      res.status(200).json(submissions);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
@@ -18,7 +21,15 @@ class SubmissionsController {
 
   static async create(req, res) {
     try {
-      res.sendStatus(200);
+      const [id] = await Submission.create({
+        form_title: req.body.form_title,
+        fields_json: req.body.fields_json,
+        answers_json: req.body.answers_json
+      });
+
+      const submission = await Submission.find(id);
+
+      res.status(200).json(submission);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
@@ -27,7 +38,8 @@ class SubmissionsController {
 
   static async show(req, res) {
     try {
-      res.sendStatus(200);
+      const submission = await Submission.find(req.params.id);
+      res.status(200).json(submission);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
@@ -36,7 +48,15 @@ class SubmissionsController {
 
   static async update(req, res) {
     try {
-      res.sendStatus(200);
+      if (req.body.answers_json) {
+        const [id] = await Submission.update(req.params.id, {
+          answers_json: req.body.answers_json
+        });
+      }
+
+      const submission = await Submission.find(req.params.id);
+
+      res.status(200).json(submission);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
@@ -45,7 +65,8 @@ class SubmissionsController {
 
   static async remove(req, res) {
     try {
-      res.sendStatus(200);
+      await Submission.destroy(req.params.id);
+      res.status(200).json();
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });

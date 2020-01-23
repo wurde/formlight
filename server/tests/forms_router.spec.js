@@ -15,10 +15,14 @@ const Form = require('../models/Form');
 describe('forms_router.js', () => {
   beforeEach(async () => {
     await Form.clearAll()
-    await Form.create({ title: 'TestFormHook1' })
-    await Form.create({ title: 'TestFormHook2' })
-    await Form.create({ title: 'TestFormHook3' })
-    await Form.create({ title: 'TestFormHook4' })
+    await Form.create({
+      title: "Signin Form",
+      fields_json: '[{"label":"username"},{"label":"password"}]'
+    })
+    await Form.create({
+      title: "Favorite Food",
+      fields_json: '[{"label":"name"}]'
+    })
   })
 
   it("process.env.NODE_ENV == 'test'", () => {
@@ -35,7 +39,7 @@ describe('forms_router.js', () => {
     return request(app)
       .post("/forms")
       .expect(400)
-      .expect("Content-Type", /json/);
+      .expect("Content-Type", /json/)
   })
 
   it("POST /forms - missing body fields", () => {
