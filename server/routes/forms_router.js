@@ -17,12 +17,9 @@ const router = express.Router();
  * Mount routes
  */
 
-// GET /forms
+// GET,POST /forms
 router.route("/forms")
   .get(FormsController.index);
-
-// POST /forms
-router.route("/forms")
   .post(FormsController.create);
 
 // GET,PUT,PATCH,DELETE /forms/:id
