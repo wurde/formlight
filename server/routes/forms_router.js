@@ -6,6 +6,7 @@
 
 const express = require('express');
 const FormsController = require('../controllers/FormsController');
+const require_body = require('../middleware/require_body');
 
 /**
  * Define router
@@ -20,6 +21,7 @@ const router = express.Router({ mergeParams: true });
 // GET,POST /forms
 router.route("/forms")
   .get(FormsController.index)
+  .all(require_body(['title']))
   .post(FormsController.create)
 
 // GET,PUT,PATCH,DELETE /forms/:id

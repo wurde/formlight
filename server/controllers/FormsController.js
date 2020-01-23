@@ -19,7 +19,14 @@ class FormsController {
 
   static async create(req, res) {
     try {
-      res.sendStatus(200);
+      const [id] = await Form.create({
+        title: req.body.title,
+        fields_json: req.body.fields_json
+      });
+
+      const form = await Form.find(id);
+
+      res.status(200).json(form);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });

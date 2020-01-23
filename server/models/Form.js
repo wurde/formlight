@@ -20,15 +20,26 @@ class Form {
   }
 
   static find(id) {
-    return db("forms").where({ id }).first();
+    return db("forms")
+      .where({ id })
+      .first();
   }
 
   static update(id, params) {
-    return db("forms").where({ id }).first().update(params);
+    return db("forms")
+      .where({ id })
+      .first()
+      .update(params);
   }
 
   static remove(id) {
-    return db("forms").where({ id }).del();
+    return db("forms")
+      .where({ id })
+      .del();
+  }
+
+  static clearAll() {
+    return db("forms").del();
   }
 }
 
