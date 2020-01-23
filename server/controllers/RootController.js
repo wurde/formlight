@@ -8,10 +8,16 @@ const Form = require('../models/Form');
 
 class RootController {
   static async index(req, res) {
-    const forms = await Form.all();
-    console.log({ forms })
-    await Form.create({ title: 'TestForm' })
-    res.sendStatus(200);
+    try {
+      const forms = await Form.all();
+      console.log({ forms })
+      await Form.create({ title: 'TestForm' })
+
+      res.sendStatus(200);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Internal Server Error' })
+    }
   }
 }
 
