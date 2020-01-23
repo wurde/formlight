@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <Toolbar />
-    <img alt="Vue logo" src="./assets/logo.png">
+    <Header />
   </div>
 </template>
 
 <script>
-import Toolbar from './components/Toolbar.vue'
+import Header from './components/Header.vue'
 
 export default {
   name: 'app',
   components: {
-    Toolbar
+    Header
   }
 }
 </script>
