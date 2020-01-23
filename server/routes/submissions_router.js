@@ -19,15 +19,15 @@ const router = express.Router({ mergeParams: true });
 
 // GET,POST /forms/:id/submissions
 router.route("/submissions")
-  .get(SubmissionsController.index);
-  .post(SubmissionsController.create);
+  .get(SubmissionsController.index)
+  .post(SubmissionsController.create)
 
 // GET,PUT,PATCH,DELETE /forms/:form_id/submissions/:id
 router.route("/submissions/:id")
-  .get(SubmissionsController.find);
-  .put(SubmissionsController.update);
-  .patch(SubmissionsController.update);
-  .delete(SubmissionsController.remove);
+  .get(SubmissionsController.find)
+  .put(SubmissionsController.update)
+  .patch(SubmissionsController.update)
+  .delete(SubmissionsController.remove)
 
 /**
  * Export router

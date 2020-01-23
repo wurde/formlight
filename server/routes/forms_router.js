@@ -19,15 +19,15 @@ const router = express.Router({ mergeParams: true });
 
 // GET,POST /forms
 router.route("/forms")
-  .get(FormsController.index);
-  .post(FormsController.create);
+  .get(FormsController.index)
+  .post(FormsController.create)
 
 // GET,PUT,PATCH,DELETE /forms/:id
 router.route("/forms/:id")
-  .get(FormsController.find);
-  .put(FormsController.update);
-  .patch(FormsController.update);
-  .delete(FormsController.remove);
+  .get(FormsController.find)
+  .put(FormsController.update)
+  .patch(FormsController.update)
+  .delete(FormsController.remove)
 
 /**
  * Mount sub-routers
