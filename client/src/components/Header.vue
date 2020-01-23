@@ -24,5 +24,11 @@ export default {
 <style scoped>
 .icon {
   font-size: 32px;
+  cursor: pointer;
+  padding: 10px 16px;
+}
+
+.icon:hover {
+  text-shadow: 0 5px 30px #BBB;
 }
 </style>
