@@ -1,13 +1,18 @@
 <template>
   <div>
-    <input type="radio" name="current-view" value="editing" checked />
-    <input type="radio" name="current-view" value="submission" />
+    <input v-if="currentView == 'editing'" type="radio" name="current-view" value="editing" checked />
+    <input v-if="currentView == 'submission'" type="radio" name="current-view" value="submission" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Header'
+  name: 'Header',
+  data: () => {
+    return {
+      currentView: 'editing'
+    }
+  }
 }
 </script>
 
