@@ -8,17 +8,7 @@
 <script>
 export default {
   name: 'Header',
-  props: ['isEditing'],
-  data: function() {
-    return {
-      currentView: 'editing'
-    }
-  },
-  methods: {
-    toggleView: function() {
-      this.currentView = this.currentView == 'editing' ? 'submission' : 'editing'
-    }
-  }
+  props: ['isEditing']
 }
 </script>
 
