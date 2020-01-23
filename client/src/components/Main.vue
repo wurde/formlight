@@ -1,7 +1,7 @@
 <template>
   <div>
-    <Form v-show="currentView == 'form'" v-on:toggleCurrentView="toggleCurrentView" />
-    <Submissions v-show="currentView == 'submissions'" v-on:toggleCurrentView="toggleCurrentView" />
+    <Form v-show="currentView == 'form'" v-on:toggleCurrentView="toggleCurrentView" v-bind:isEditing="isEditing" />
+    <Submissions v-show="currentView == 'submissions'" v-on:toggleCurrentView="toggleCurrentView" v-bind:isEditing="isEditing" />
   </div>
 </template>
 
