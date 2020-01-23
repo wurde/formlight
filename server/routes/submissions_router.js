@@ -11,7 +11,7 @@ const SubmissionsController = require('../controllers/SubmissionsController');
  * Define router
  */
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 /**
  * Mount routes

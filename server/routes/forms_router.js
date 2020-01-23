@@ -11,7 +11,7 @@ const FormsController = require('../controllers/FormsController');
  * Define router
  */
 
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 /**
  * Mount routes
@@ -28,6 +28,12 @@ router.route("/forms/:id")
   .put(FormsController.update);
   .patch(FormsController.update);
   .delete(FormsController.remove);
+
+/**
+ * Mount sub-routers
+ */
+
+router.use("/forms/:id", require('./submissions_router'));
 
 /**
  * Export router
