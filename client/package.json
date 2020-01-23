@@ -6,7 +6,9 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "./node_modules/.bin/cypress open"
+    "test": "start-server-and-test serve http://localhost:8080 cy:run",
+    "cy:run": "./node_modules/.bin/cypress run",
+    "cy:open": "./node_modules/.bin/cypress open"
   },
   "dependencies": {
     "core-js": "^3.4.4",
@@ -20,6 +22,7 @@
     "cypress": "^3.7.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "start-server-and-test": "^1.10.6",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {

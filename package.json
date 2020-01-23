@@ -4,6 +4,7 @@
   "description": "A lightweight Form Builder web app using Vue.js.",
   "private": true,
   "scripts": {
+    "test": "concurrently 'npm test --prefix client' && 'npm test --prefix client'",
     "server:start": "npm run start --prefix server",
     "server:start:watch": "npm run start:watch --prefix server",
     "client:serve": "npm run serve --prefix client",
@@ -12,5 +13,8 @@
     "client:test": "npm run test --prefix client"
   },
   "author": "Andy Bettisworth",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^5.0.0"
+  }
 }
