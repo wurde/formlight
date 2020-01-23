@@ -4,7 +4,8 @@
   "description": "An express server.",
   "private": true,
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "start:watch": "nodemon index.js"
   },
   "author": "Andy Bettisworth",
   "license": "MIT",
@@ -12,5 +13,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^3.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
   }
 }

@@ -4,6 +4,8 @@
   "description": "A lightweight Form Builder web app using Vue.js.",
   "private": true,
   "scripts": {
+    "server:start": "npm run start --prefix server",
+    "server:start:watch": "npm run start:watch --prefix server",
     "client:serve": "npm run serve --prefix client",
     "client:build": "npm run build --prefix client",
     "client:lint": "npm run lint --prefix client",
