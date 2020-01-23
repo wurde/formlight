@@ -108,3 +108,8 @@ dist
 
 # VSCode
 .vscode
+
+# SQLite
+*.sqlite3
+*.sqlite
+*.db
