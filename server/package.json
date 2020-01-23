@@ -6,9 +6,9 @@
   "scripts": {
     "start": "node index.js",
     "start:watch": "nodemon index.js",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:cov": "jest --coverage"
+    "test": "cross-env NODE_ENV=test jest",
+    "test:watch": "cross-env NODE_ENV=test jest --watch",
+    "test:cov": "cross-env NODE_ENV=test jest --coverage"
   },
   "author": "Andy Bettisworth",
   "license": "MIT",
@@ -20,6 +20,7 @@
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
+    "cross-env": "^6.0.3",
     "jest": "^25.1.0",
     "nodemon": "^2.0.2",
     "supertest": "^4.0.2"

@@ -11,7 +11,8 @@ const config = require('../knexfile');
  * Define client
  */
 
-const client = knex(config["development"]);
+const env = process.env.NODE_ENV || 'development';
+const client = knex(config[env]);
 
 /**
  * Export client
