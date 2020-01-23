@@ -5,6 +5,7 @@
  */
 
 const express = require('express');
+const RootController = require('../controllers/RootController');
 
 /**
  * Define router
@@ -16,14 +17,11 @@ const router = express.Router();
  * Mount routes
  */
 
-router.get("/", (req, res) => {
-  res.sendStatus(200);
-});
+router.route("/")
+  .get(RootController.index);
 
-router.get("/err", (req, res) => {
-  throw new Error("Test server failure.");
-  res.sendStatus(200);
-});
+router.route("/errs")
+  .get(RootController.err);
 
 /**
  * Export router
