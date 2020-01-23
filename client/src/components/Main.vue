@@ -1,13 +1,21 @@
 <template>
   <div>
-    <h1>Main</h1>
+    <Form />
+    <Submissions />
   </div>
 </template>
 
 <script>
+import Form from './Form.vue';
+import Submissions from './Submissions.vue';
+
 export default {
   name: 'Main',
-  props: ['isEditing']
+  props: ['isEditing'],
+  components: {
+    Form,
+    Submissions,
+  }
 }
 </script>
 
