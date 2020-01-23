@@ -9,7 +9,8 @@ const Form = require('../models/Form');
 class FormsController {
   static async index(req, res) {
     try {
-      res.sendStatus(200);
+      const forms = await Form.all();
+      res.status(200).json(forms);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
