@@ -46,22 +46,50 @@ describe('forms_router.js', () => {
   })
 
   it("GET /forms/:id", () => {
-    return request(app).get('/forms/1').expect(200)
+    return request(app).get('/forms/1')
+      .expect(200)
+      .expect('Content-Type', /json/)
   })
 
   it("GET /forms/:id - not found", () => {
-    return request(app).get('/forms/5').expect(404)
+    return request(app)
+      .get("/forms/99")
+      .expect(404);
   })
 
   it("PUT /forms/:id", () => {
-    return request(app).put('/forms/1').expect(200)
+    return request(app)
+      .put("/forms/1")
+      .expect(200);
   })
+
+  it("PUT /forms/:id - not found", () => {
+    return request(app)
+      .put("/forms/99")
+      .expect(404);
+  });
 
   it("PATCH /forms/:id", () => {
-    return request(app).patch('/forms/1').expect(200)
+    return request(app)
+      .patch("/forms/1")
+      .expect(200);
   })
 
+  it("PATCH /forms/:id - not found", () => {
+    return request(app)
+      .patch("/forms/99")
+      .expect(404);
+  });
+
   it("DELETE /forms/:id", () => {
-    return request(app).delete('/forms/1').expect(200)
+    return request(app)
+      .delete("/forms/1")
+      .expect(200);
   })
+
+  it("DELETE /forms/:id - not found", () => {
+    return request(app)
+      .delete("/forms/99")
+      .expect(404);
+  });
 })
