@@ -2,7 +2,7 @@ BEGIN TRANSACTION;
 
 CREATE TABLE IF NOT EXISTS forms (
   id integer PRIMARY KEY AUTOINCREMENT,
-  title text NOT NULL,
+  title text NOT NULL UNIQUE,
   fields_json text
 );
 
