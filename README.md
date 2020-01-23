@@ -12,3 +12,7 @@ uses Jest and `supertest` for unit testing RESTful endpoints.
 npm install
 npm test
 ```
+
+## License
+
+[MIT License](LICENSE)
