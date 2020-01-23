@@ -17,7 +17,7 @@ const router = express.Router({ mergeParams: true });
  * Mount routes
  */
 
-// GET,POST /forms/:id/submissions
+// GET,POST /forms/:form_id/submissions
 router.route("/submissions")
   .get(SubmissionsController.index)
   .post(SubmissionsController.create)

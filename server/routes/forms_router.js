@@ -33,7 +33,7 @@ router.route("/forms/:id")
  * Mount sub-routers
  */
 
-router.use("/forms/:id", require('./submissions_router'));
+router.use("/forms/:form_id", require('./submissions_router'));
 
 /**
  * Export router
