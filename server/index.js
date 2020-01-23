@@ -32,14 +32,7 @@ app.use(express.json());
  * Mount routes
  */
 
-app.get('/', (req, res) => {
-  res.sendStatus(200);
-})
-
-app.get('/error', (req, res) => {
-  throw new Error('Test server failure.')
-  res.sendStatus(200);
-})
+app.use(require('./routes/root_router'));
 
 /**
  * Mount error handlers
