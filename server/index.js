@@ -5,6 +5,8 @@
  */
 
 const express = require('express');
+const helmet = require('helmet');
+const cors = require('cors');
 
 /**
  * Constants
@@ -17,6 +19,14 @@ const port = process.env.PORT || 3000;
  */
 
 const app = express();
+
+/**
+ * Mount middleware
+ */
+
+app.use(helmet());
+app.use(cors());
+app.use(express.json());
 
 /**
  * Mount routes
