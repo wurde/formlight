@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Header />
+    <Header v-bind:isEditing="isEditing" v-on:toggleIsEditing="toggleIsEditing" />
   </div>
 </template>
 
@@ -11,6 +11,16 @@ export default {
   name: 'app',
   components: {
     Header
+  },
+  data: function() {
+    return {
+      isEditing: true
+    }
+  },
+  methods: {
+    toggleIsEditing: function() {
+      this.isEditing = !this.isEditing
+    }
   }
 }
 </script>

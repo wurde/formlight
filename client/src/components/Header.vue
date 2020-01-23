@@ -1,13 +1,14 @@
 <template>
   <div>
-    <i v-if="currentView == 'editing'" v-on:click="toggleView" class="fas fa-edit icon"></i>
-    <i v-if="currentView == 'submission'" v-on:click="toggleView" class="fas fa-file-alt icon"></i>
+    <i v-show="isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-file-alt icon"></i>
+    <i v-show="!isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-edit icon"></i>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Header',
+  props: ['isEditing'],
   data: function() {
     return {
       currentView: 'editing'
