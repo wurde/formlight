@@ -63,7 +63,7 @@ class FormsController {
   static async remove(req, res) {
     try {
       await Form.destroy(req.params.id);
-      res.sendStatus(200).json();
+      res.status(200).json();
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });
