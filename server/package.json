@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "0.1.0",
+  "description": "An express server.",
+  "private": true,
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Andy Bettisworth",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "helmet": "^3.21.2"
+  }
+}
