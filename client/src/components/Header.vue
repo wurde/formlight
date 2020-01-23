@@ -30,13 +30,12 @@ export default {
 }
 
 .icon:hover {
-  text-shadow: 0 5px 30px #BBB;
+  text-shadow: 0 5px 30px #EEC480;
 }
 
 .header {
   max-width: 80%;
   margin: 0 auto;
-  border: 1px solid red;
   text-align: right;
 }
 </style>
