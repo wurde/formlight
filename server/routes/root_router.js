@@ -20,9 +20,6 @@ const router = express.Router();
 router.route("/")
   .get(RootController.index);
 
-router.route("/errs")
-  .get(RootController.err);
-
 /**
  * Export router
  */
