@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "start:watch": "nodemon index.js",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "author": "Andy Bettisworth",
   "license": "MIT",
