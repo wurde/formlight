@@ -1,5 +1,6 @@
 <template>
   <div>
+    <i class="fas fa-edit"></i>
     <input v-if="currentView == 'editing'" type="radio" name="current-view" value="editing" checked />
     <input v-if="currentView == 'submission'" type="radio" name="current-view" value="submission" />
   </div>
