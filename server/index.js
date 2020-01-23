@@ -33,8 +33,19 @@ app.use(express.json());
  */
 
 app.get('/', (req, res) => {
-  res.sendStatus(500);
+  res.sendStatus(200);
 })
+
+app.get('/error', (req, res) => {
+  throw new Error('Test server failure.')
+  res.sendStatus(200);
+})
+
+/**
+ * Mount error handlers
+ */
+
+app.use(require('./middleware/error_handlers'));
 
 /**
  * Start server
