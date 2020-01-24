@@ -7,7 +7,7 @@
       <div v-show="alert" class="alert">{{alert}}</div>
 
       <form @submit.prevent="submit">
-        <label for="form-title">Title</label>
+        <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
         <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="title" autofocus />
 
         <button type="submit">
@@ -54,10 +54,12 @@ export default {
       axios.post(backendURL + '/forms', { title: this.title })
       .then(() => {
         alert('success')
+        this.error = null
         this.alert = 'Successfully saved changes.'
       })
       .catch(err => {
         const res = err.response;
+        this.alert = null
         this.error = `Error: ${res.data.message}`;
       })
     }
@@ -116,7 +118,13 @@ a:hover {
   padding-bottom: 10px;
 }
 
+.text-danger {
+  color: red;
+}
 .input-danger {
   border: 1px solid red;
+}
+.input-danger:focus {
+  box-shadow: 0 1px 5px red;
 }
 </style>
