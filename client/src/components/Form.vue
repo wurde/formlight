@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Form {{isEditing}}</h3>
+    <h3>Form</h3>
     <a v-on:click.prevent="$emit('toggleCurrentView')">See submissions</a>
   </div>
 </template>
