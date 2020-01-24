@@ -10,6 +10,10 @@
         <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
         <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="title" autofocus />
 
+        <button class="btn-add-field">
+          <i class="fa fa-plus icon"></i>
+        </button>
+
         <button type="submit" class="btn-submit">
           Save changes
         </button>
@@ -124,18 +128,26 @@ a:hover {
   box-shadow: 0 1px 5px red;
 }
 
-.btn-submit {
+button {
   background-color: #FFF;
-  border: 3px dotted #CBDBEA;
-  padding: 10px 16px;
-  font-size: 18px;
-  border-radius: 5px;
-  margin: 10px 0px;
   cursor: pointer;
   outline: none;
+  font-size: 18px;
+  border: none;
+}
+
+.btn-submit {
+  border: 3px dotted #CBDBEA;
+  padding: 10px 16px;
+  border-radius: 5px;
+  margin: 10px 0px;
 }
 .btn-submit:hover {
   background-color: #CBDBEA;
 }
 
+.icon {
+  background-color: #FFF;
+  padding: 10px 16px;
+}
 </style>
