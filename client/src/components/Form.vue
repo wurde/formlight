@@ -1,7 +1,9 @@
 <template>
   <section class="form-section">
     <div v-show="isEditing" class="editable">
-      <input type="text" name="title" v-model="title" autofocus />
+      <h3>Form</h3>
+      <label for="form-title">Title</label>
+      <input id="form-title" type="text" name="title" v-model="title" autofocus />
     </div>
 
     <div v-show="!isEditing" class="display">
@@ -42,7 +44,12 @@ input {
   padding: 5px;
   border-radius: 5px;
   border: 1px solid #CCC;
+  margin-top: 8px;
   outline: none;
+}
+
+label {
+  font-weight: bold;
 }
 
 nav {
