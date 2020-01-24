@@ -1,5 +1,5 @@
 <template>
-  <div>>
+  <div>
     <h3>Form</h3>
     <a v-on:click.prevent="$emit('toggleCurrentView')" class="a-see-submissions">See submissions</a>
   </div>
