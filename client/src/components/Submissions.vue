@@ -1,7 +1,7 @@
 <template>
   <div>
     <h3>Submissions</h3>
-    <a v-on:click.prevent="$emit('toggleCurrentView')">See form</a>
+    <a v-on:click.prevent="$emit('toggleCurrentView')" class="a-see-form">See form</a>
   </div>
 </template>
 
