@@ -1,8 +1,15 @@
 <template>
-  <div>
-    <h3>Submissions</h3>
+  <section>
+    <div v-show="isEditing" class="editable">
+      <h3>Submissions</h3>
+    </div>
+
+    <div v-show="!isEditing" class="display">
+      <h3>Submissions</h3>
+    </div>
+
     <a v-on:click.prevent="$emit('toggleCurrentView')" class="a-see-form">See form</a>
-  </div>
+  </section>
 </template>
 
 <script>

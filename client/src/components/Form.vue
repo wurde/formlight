@@ -1,14 +1,26 @@
 <template>
-  <div>
-    <h3>Form</h3>
+  <section>
+    <div v-show="isEditing" class="editable">
+      <input type="text" name="title" v-model="title" autofocus />
+    </div>
+
+    <div v-show="!isEditing" class="display">
+      <h3>{{title}}</h3>
+    </div>
+
     <a v-on:click.prevent="$emit('toggleCurrentView')" class="a-see-submissions">See submissions</a>
-  </div>
+  </section>
 </template>
 
 <script>
 export default {
   name: 'Form',
   props: ['isEditing'],
+  data: function() {
+    return {
+      title: 'ExampleForm'
+    }
+  },
   methods: {
     toggleCurrentView: function() {
       alert('toggle')
