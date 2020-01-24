@@ -8,7 +8,9 @@
       <h3>{{title}}</h3>
     </div>
 
-    <a v-on:click.prevent="$emit('toggleCurrentView')" class="a-see-submissions">See submissions</a>
+    <nav>
+      <a v-on:click.prevent="$emit('toggleCurrentView')" class="a-see-submissions">See submissions</a>
+    </nav>
   </section>
 </template>
 
@@ -43,10 +45,15 @@ input {
   outline: none;
 }
 
+nav {
+  margin: 20px 0px;
+}
+
 a {
   text-decoration: underline;
   cursor: pointer;
   padding: 10px 16px;
+  padding-left: 0px;
 }
 
 a:hover {
