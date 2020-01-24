@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="submissions-section">
     <div v-show="isEditing" class="editable">
       <h3>Submissions</h3>
     </div>
@@ -25,6 +25,11 @@ export default {
 </script>
 
 <style scoped>
+.submissions-section {
+  padding: 15px;
+  border: 1px solid blue;
+}
+
 a {
   text-decoration: underline;
   cursor: pointer;

@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section class="form-section">
     <div v-show="isEditing" class="editable">
       <input type="text" name="title" v-model="title" autofocus />
     </div>
@@ -30,6 +30,11 @@ export default {
 </script>
 
 <style scoped>
+.form-section {
+  padding: 15px;
+  border: 1px solid blue;
+}
+
 a {
   text-decoration: underline;
   cursor: pointer;
