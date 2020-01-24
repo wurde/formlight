@@ -10,7 +10,7 @@
         <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
         <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="title" autofocus />
 
-        <button type="submit">
+        <button type="submit" class="btn-submit">
           Save changes
         </button>
       </form>
@@ -74,13 +74,13 @@ input {
   padding: 15px;
   margin: 10px 0px;
   border-radius: 5px;
-  border: 1px solid #CCC;
+  border: 1px solid #CBDBEA;
   font-size: 18px;
   outline: none;
 }
 
 input:focus {
-  box-shadow: 0 3px 15px #EEC480;
+  box-shadow: 0 3px 15px #CBDBEA;
 }
 
 label {
@@ -123,4 +123,19 @@ a:hover {
 .input-danger:focus {
   box-shadow: 0 1px 5px red;
 }
+
+.btn-submit {
+  background-color: #FFF;
+  border: 3px dotted #CBDBEA;
+  padding: 10px 16px;
+  font-size: 18px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+  outline: none;
+}
+.btn-submit:hover {
+  background-color: #CBDBEA;
+}
+
 </style>
