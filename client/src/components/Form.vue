@@ -2,8 +2,14 @@
   <section class="form-section">
     <div v-show="isEditing" class="editable">
       <h3>Form</h3>
-      <label for="form-title">Title</label>
-      <input id="form-title" type="text" name="title" v-model="title" autofocus />
+      <form v-on:submit.prevent="saveForm">
+        <label for="form-title">Title</label>
+        <input id="form-title" type="text" name="title" v-model="title" autofocus />
+
+        <button type="submit">
+          Save changes
+        </button>
+      </form>
     </div>
 
     <div v-show="!isEditing" class="display">
@@ -28,6 +34,9 @@ export default {
   methods: {
     toggleCurrentView: function() {
       alert('toggle')
+    },
+    saveForm: function() {
+      alert('save')
     }
   }
 }
