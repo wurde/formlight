@@ -35,6 +35,14 @@ export default {
   border: 1px solid blue;
 }
 
+input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #CCC;
+  outline: none;
+}
+
 a {
   text-decoration: underline;
   cursor: pointer;
