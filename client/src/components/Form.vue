@@ -4,6 +4,7 @@
       <h3>Form</h3>
 
       <div v-show="error" class="errors">{{error}}</div>
+      <div v-show="alert" class="alert">{{alert}}</div>
 
       <form @submit.prevent="submit">
         <label for="form-title">Title</label>
@@ -36,7 +37,8 @@ export default {
   data: function() {
     return {
       title: 'ExampleForm',
-      error: null
+      error: null,
+      alert: null,
     }
   },
   methods: {
@@ -45,10 +47,13 @@ export default {
     },
     submit: function() {
       axios.post(backendURL + '/forms', { title: this.title })
-      .then(res => alert(JSON.stringify(res)))
+      .then(() => {
+        alert('success')
+        this.alert = 'Successfully saved changes.'
+      })
       .catch(err => {
         const res = err.response;
-        this.error = `Error: ${res.data.error.message}`;
+        this.error = `Error: ${res.data.message}`;
       })
     }
   }
@@ -91,6 +96,12 @@ a:hover {
 
 .errors {
   color: red;
+  font-weight: bold;
+  padding-bottom: 10px;
+}
+
+.alert {
+  color: #007149;
   font-weight: bold;
   padding-bottom: 10px;
 }

@@ -21,8 +21,14 @@ class Form {
     return db(table);
   }
 
-  static create(params) {
-    return db(table).insert(params);
+  static async create(params) {
+    if (!await this.uniqueTitle(params.title)) {
+      const err = new Error()
+      err.status = 400
+      err.message = 'Title must be unique.'
+      throw err
+    }
+    return await db(table).insert(params);
   }
 
   static find(id) {
@@ -46,6 +52,15 @@ class Form {
 
   static clearAll() {
     return db(table).truncate();
+  }
+
+  /**
+   * Validations
+   */
+
+  static async uniqueTitle(title) {
+    const x = await db(table).where({ title }).first();
+    return x ? false : true
   }
 }
 
