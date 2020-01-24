@@ -37,7 +37,6 @@ export default {
   max-width: 80%;
   margin: 0 auto;
   margin-top: 10px;
-  border: 1px solid red;
 }
 
 * {
