@@ -47,13 +47,9 @@ export default {
     }
   },
   methods: {
-    toggleCurrentView: function() {
-      alert('toggle')
-    },
     submit: function() {
       axios.post(backendURL + '/forms', { title: this.title })
       .then(() => {
-        alert('success')
         this.error = null
         this.alert = 'Successfully saved changes.'
       })

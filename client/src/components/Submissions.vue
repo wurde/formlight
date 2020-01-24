@@ -17,12 +17,7 @@
 <script>
 export default {
   name: 'Submissions',
-  props: ['isEditing'],
-  methods: {
-    toggleCurrentView: function() {
-      alert('toggle')
-    }
-  }
+  props: ['isEditing']
 }
 </script>
 
