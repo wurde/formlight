@@ -21,6 +21,7 @@ export default {
 a {
   text-decoration: underline;
   cursor: pointer;
+  padding: 10px 16px;
 }
 
 a:hover {
