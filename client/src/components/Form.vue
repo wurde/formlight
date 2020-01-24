@@ -44,7 +44,7 @@ export default {
       alert('toggle')
     },
     submit: function() {
-      axios.post(backendURL + '/forms')
+      axios.post(backendURL + '/forms', { title: this.title })
       .then(res => alert(JSON.stringify(res)))
       .catch(err => {
         const res = err.response;
