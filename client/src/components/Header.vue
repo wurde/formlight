@@ -24,8 +24,6 @@ export default {
 }
 
 .header {
-  max-width: 80%;
-  margin: 0 auto;
   text-align: right;
 }
 </style>
