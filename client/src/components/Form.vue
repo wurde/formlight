@@ -10,9 +10,11 @@
         <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
         <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="title" autofocus />
 
-        <button class="btn-add-field">
-          <i class="fa fa-plus icon"></i>
-        </button>
+        <div class="row">
+          <button @click.prevent="addField" class="btn-add-field">
+            <i class="fa fa-plus icon"></i>
+          </button>
+        </div>
 
         <button type="submit" class="btn-submit">
           Save changes
@@ -62,6 +64,9 @@ export default {
         this.alert = null
         this.error = `Error: ${res.data.message}`;
       })
+    },
+    addField: function() {
+      alert("add field")
     }
   }
 }
@@ -130,16 +135,25 @@ a:hover {
 
 button {
   background-color: #FFF;
+  border-radius: 5px;
   cursor: pointer;
   outline: none;
   font-size: 18px;
   border: none;
 }
 
+.btn-add-field {
+  border: 1px solid #7FB8A4;
+  color: #7FB8A4;
+}
+.btn-add-field:hover {
+  background-color: #7FB8A4;
+  color: #FFF;
+}
+
 .btn-submit {
   border: 3px dotted #CBDBEA;
   padding: 10px 16px;
-  border-radius: 5px;
   margin: 10px 0px;
 }
 .btn-submit:hover {
@@ -147,7 +161,11 @@ button {
 }
 
 .icon {
-  background-color: #FFF;
   padding: 10px 16px;
+}
+
+.row {
+  display: flex;
+  padding: 10px 0px;
 }
 </style>
