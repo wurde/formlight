@@ -10,7 +10,7 @@
       <div v-show="error" class="errors">{{error}}</div>
       <div v-show="alert" class="alert">{{alert}}</div>
 
-      <form @submit.prevent="submitUpdateForm">
+      <form @submit.prevent="updateForm">
         <div class="form-group">
           <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
           <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="form.title" autofocus />
@@ -24,6 +24,7 @@
                  v-bind:type="field.type"
                  v-bind:name="fieldName(field.label)"
                  v-bind:value="field.label"
+                 v-model="form.fields_json[index].label"
                  v-bind:class="{ 'input-danger': hasError }"
                  v-focus />
         </div>
@@ -83,7 +84,7 @@ export default {
     }
   },
   created: function() {
-    this.fetchFormData();
+    this.fetchForm();
   },
   computed: {
     hasError: function() {
@@ -91,7 +92,7 @@ export default {
     }
   },
   methods: {
-    fetchFormData: function() {
+    fetchForm: function() {
       this.form = this.error = this.alert = null;
       this.isLoading = true;
 
@@ -108,7 +109,7 @@ export default {
       //   this.error = 'Failed to fetch form data.';
       // })
     },
-    submitUpdateForm: function() {
+    updateForm: function() {
       axios.patch(backendURL + '/forms/1', this.form)
       .then(() => {
         this.error = this.alert = null
@@ -120,7 +121,7 @@ export default {
       })
     },
     submitForm: function() {
-      alert('Submit Form')
+      alert('Submit', JSON.stringify(this.form, null, 2));
       // axios.post(backendURL + '/forms/1/submissions', {
       //   form_title: this.form.title,
       //   fields_json: this.from.fields_json,
