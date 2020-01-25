@@ -1,7 +1,7 @@
 <template>
   <div class="header">
-    <i v-show="isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-file-alt icon"></i>
-    <i v-show="!isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-edit icon"></i>
+    <i v-show="isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-file-alt icon" tabindex="0"></i>
+    <i v-show="!isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-edit icon" tabindex="0"></i>
   </div>
 </template>
 
@@ -17,9 +17,10 @@ export default {
   font-size: 32px;
   cursor: pointer;
   padding: 10px 16px;
+  outline: none;
 }
 
-.icon:hover {
+.icon:focus, .icon:hover {
   text-shadow: 0 5px 30px #EEC480;
 }
 

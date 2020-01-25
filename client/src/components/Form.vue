@@ -30,12 +30,12 @@
         </div>
 
         <div class="row">
-          <button type="button" v-on:click.prevent="addField" class="btn-add-field">
+          <button type="button" v-on:click.prevent="addField" class="btn-add-field" tabindex="0">
             <i class="fa fa-plus icon"></i>
           </button>
         </div>
 
-        <button type="submit" class="btn-submit">
+        <button type="submit" class="btn-submit" tabindex="0">
           Save changes
         </button>
       </form>
@@ -62,7 +62,7 @@
     </div>
 
     <nav>
-      <a v-on:click.prevent="$emit('toggleCurrentView')" class="a-see-submissions">See submissions</a>
+      <a v-on:click.prevent="$emit('toggleCurrentView')" class="a-see-submissions" tabindex="0">See submissions</a>
     </nav>
   </section>
 </template>
@@ -142,7 +142,6 @@ export default {
     },
     addField: function() {
       this.form.fields_json.push({ 'type': 'text', 'label': '' })
-      // Focus last field
     },
     fieldName: function(label) {
       return label.replace(' ', '-').toLowerCase()
@@ -191,9 +190,10 @@ a {
   cursor: pointer;
   padding: 10px 16px;
   padding-left: 0px;
+  outline: none;
 }
 
-a:hover {
+a:focus, a:hover {
   text-shadow: 0 5px 30px #EEC480;
 }
 
@@ -232,7 +232,7 @@ button {
   border: 1px solid #7FB8A4;
   color: #7FB8A4;
 }
-.btn-add-field:hover {
+.btn-add-field:focus, .btn-add-field:hover {
   background-color: #7FB8A4;
   color: #FFF;
 }
@@ -242,7 +242,7 @@ button {
   padding: 10px 16px;
   margin: 10px 0px;
 }
-.btn-submit:hover {
+.btn-submit:focus, .btn-submit:hover {
   background-color: #CBDBEA;
 }
 
