@@ -21,7 +21,12 @@
         <h4>Fields</h4>
 
         <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
-          <input v-bind:id="'field-' + index" v-bind:type="field.type" v-bind:name="fieldName(field.label)" v-bind:value="field.label" v-bind:class="{ 'input-danger': hasError }" />
+          <input v-bind:id="'field-' + index"
+                 v-bind:type="field.type"
+                 v-bind:name="fieldName(field.label)"
+                 v-bind:value="field.label"
+                 v-bind:class="{ 'input-danger': hasError }"
+                 v-focus />
         </div>
 
         <div class="row">
@@ -137,9 +142,17 @@ export default {
     },
     addField: function() {
       this.form.fields_json.push({ 'type': 'text', 'label': '' })
+      // Focus last field
     },
     fieldName: function(label) {
       return label.replace(' ', '-').toLowerCase()
+    }
+  },
+  directives: {
+    focus: {
+      inserted: function(element) {
+        element.focus();
+      }
     }
   }
 }
