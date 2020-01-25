@@ -1,7 +1,13 @@
 <template>
   <section class="form-section">
-    <div v-show="isEditing" class="editable">
+    <div v-if="isLoading" class="loading">
+      Loading...
+    </div>
+
+    <div v-if="!isLoading" v-show="isEditing" class="editable">
       <h3>Form</h3>
+
+      {{form}}
 
       <div v-show="error" class="errors">{{error}}</div>
       <div v-show="alert" class="alert">{{alert}}</div>
@@ -9,7 +15,7 @@
       <form @submit.prevent="submitUpdateForm">
         <div class="form-group">
           <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
-          <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="title" autofocus />
+          <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="form.title" autofocus />
         </div>
 
         <h4>Fields</h4>
@@ -30,8 +36,8 @@
       </form>
     </div>
 
-    <div v-show="!isEditing" class="display">
-      <h3>{{title}}</h3>
+    <div v-if="!isLoading" v-show="!isEditing" class="display">
+      <h3>{{form.title}}</h3>
 
       <div v-show="error" class="errors">{{error}}</div>
       <div v-show="alert" class="alert">{{alert}}</div>
@@ -64,11 +70,14 @@ export default {
   props: ['isEditing'],
   data: function() {
     return {
-      title: 'Applicant Survey',
-      fields: [{ 'type': 'text', 'label': 'Name' }],
+      isLoading: false,
+      form: null,
       error: null,
       alert: null
     }
+  },
+  created: function() {
+    this.fetchFormData();
   },
   computed: {
     hasError: function() {
@@ -79,6 +88,20 @@ export default {
     }
   },
   methods: {
+    fetchFormData: function() {
+      this.form = this.error = this.alert = null;
+      this.isLoading = true;
+
+      axios.get(backendURL + '/forms/1')
+      .then(res => {
+        this.isLoading = false;
+        this.alert = 'Successfully fetched data.';
+        this.form = res.data
+      }).catch(() => {
+        this.isLoading = false;
+        this.error = 'Failed to fetch form data.';
+      })
+    },
     submitUpdateForm: function() {
       axios.post(backendURL + '/forms', {
         title: this.title,
