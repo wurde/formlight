@@ -1,6 +1,6 @@
 <template>
   <section class="form-section">
-    <div v-if="isLoading" class="loading">
+    <div v-if="isLoading">
       Loading...
     </div>
 
@@ -20,7 +20,7 @@
 
         <h4>Fields</h4>
 
-        <div v-for="(field, index) in fields" v-bind:key="fieldName(field.label)" class="form-group">
+        <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
           <input v-bind:id="'field-' + index" v-bind:type="field.type" v-bind:name="fieldName(field.label)" v-bind:value="field.label" v-bind:class="{ 'input-danger': hasError }" />
         </div>
 
@@ -42,8 +42,9 @@
       <div v-show="error" class="errors">{{error}}</div>
       <div v-show="alert" class="alert">{{alert}}</div>
 
+      <!--
       <form @submit.prevent="submitForm">
-        <div v-for="(field, index) in fields" v-bind:key="fieldName(field.label)" class="form-group">
+        <div v-for="(field, index) in from.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
           <label v-bind:for="'field-' + index" v-bind:class="{ 'text-danger':  hasError}">{{ field.label }}</label>
           <input v-bind:id="'field-' + index" v-bind:type="field.type" v-bind:name="fieldName(field.label)" v-bind:class="{ 'input-danger': hasError }" />
         </div>
@@ -52,6 +53,7 @@
           Submit
         </button>
       </form>
+      -->
     </div>
 
     <nav>
@@ -71,7 +73,7 @@ export default {
   data: function() {
     return {
       isLoading: false,
-      form: null,
+      form: {},
       error: null,
       alert: null
     }
@@ -92,51 +94,49 @@ export default {
       this.form = this.error = this.alert = null;
       this.isLoading = true;
 
-      axios.get(backendURL + '/forms/1')
-      .then(res => {
-        this.isLoading = false;
-        this.alert = 'Successfully fetched data.';
-        this.form = res.data
-      }).catch(() => {
-        this.isLoading = false;
-        this.error = 'Failed to fetch form data.';
-      })
+      this.alert = 'Successfully fetched data.';
+      this.form = { title: 'Applicant Survey', fields_json: [{ type: 'text', label: 'What is your favorite color?' }] }
+      this.isLoading = false;
+      // axios.get(backendURL + '/forms/1')
+      // .then(res => {
+      //   this.isLoading = false;
+      //   this.alert = 'Successfully fetched data.';
+      //   this.form = res.data
+      // }).catch(() => {
+      //   this.isLoading = false;
+      //   this.error = 'Failed to fetch form data.';
+      // })
     },
     submitUpdateForm: function() {
-      axios.post(backendURL + '/forms', {
-        title: this.title,
-        fields_json: this.fields_json,
-      })
+      axios.patch(backendURL + '/forms/1', this.form)
       .then(() => {
-        this.error = null
+        this.error = this.alert = null
         this.alert = 'Successfully saved changes.'
       })
       .catch(err => {
-        const res = err.response;
         this.alert = null
-        this.error = `Error: ${res.data.message}`;
+        this.error = `Error: ${err.response.data.message}`;
       })
     },
     submitForm: function() {
-      axios.post(backendURL + '/forms/1/submissions', {
-        form_title: this.form_title,
-        fields_json: this.fields_json,
-        answers_json: this.answers_json,
-      })
-      .then(() => {
-        this.error = null
-        this.alert = 'Successfully saved changes.'
-      })
-      .catch(err => {
-        const res = err.response;
-        this.alert = null
-        this.error = `Error: ${res.data.message}`;
-      })
+      alert('Submit Form')
+      // axios.post(backendURL + '/forms/1/submissions', {
+      //   form_title: this.form.title,
+      //   fields_json: this.from.fields_json,
+      //   answers_json: this.answers_json,
+      // })
+      // .then(() => {
+      //   this.error = null
+      //   this.alert = 'Successfully saved changes.'
+      // })
+      // .catch(err => {
+      //   const res = err.response;
+      //   this.alert = null
+      //   this.error = `Error: ${res.data.message}`;
+      // })
     },
     addField: function() {
-      this.fields = this.fields.push({
-        'type': 'text', 'label': 'Hello'
-      })
+      this.form.fields_json.push({ 'type': 'text', 'label': '' })
     },
     fieldName: function(label) {
       return label.replace(' ', '-').toLowerCase()
