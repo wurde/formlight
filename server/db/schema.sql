@@ -8,9 +8,9 @@ CREATE TABLE IF NOT EXISTS forms (
 
 CREATE TABLE IF NOT EXISTS submissions (
   id integer PRIMARY KEY AUTOINCREMENT,
-  form_title text NOT NULL,
+  title text NOT NULL,
   fields_json text,
-  answers_json text
+  answers text
 );
 
 END TRANSACTION;

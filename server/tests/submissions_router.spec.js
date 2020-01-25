@@ -20,17 +20,16 @@ describe('submissions_router.js', () => {
       title: "SigninForm",
       fields_json: '[{"label":"username"},{"label":"password"}]'
     });
-
     await Submission.clearAll();
     await Submission.create({
-      form_title: "SigninForm",
+      title: "SigninForm",
       fields_json: '[{"label":"username"},{"label":"password"}]',
-      answers_json: '[{"username":"admin"},{"password":"secret"}]',
+      answers: '[{"username":"admin"},{"password":"secret"}]',
     });
     await Submission.create({
-      form_title: "SigninForm",
+      title: "SigninForm",
       fields_json: '[{"label":"username"},{"label":"password"}]',
-      answers_json: '[{"username":"andy"},{"password":"test-1-2-3"}]',
+      answers: '[{"username":"andy"},{"password":"test-1-2-3"}]',
     });
   });
 
@@ -64,9 +63,9 @@ describe('submissions_router.js', () => {
     return request(app)
       .post("/forms/1/submissions")
       .send({
-        form_title: "Signin Form",
+        title: "Signin Form",
         fields_json: '[{"label":"username"},{"label":"password"}]',
-        answers_json: '[{"username":"myname"},{"password":"secret123"}]'
+        answers: '[{"username":"myname"},{"password":"secret123"}]'
       })
       .expect(200)
       .expect("Content-Type", /json/);

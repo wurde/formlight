@@ -25,7 +25,6 @@
                     v-bind:id="'update-field-' + index"
                     v-bind:type="field.type"
                     v-bind:name="fieldName(field.label)"
-                    v-bind:value="field.label"
                     v-model="form.fields_json[index].label"
                     v-bind:class="{ 'input-danger': hasError }"
                     v-focus />
@@ -117,7 +116,7 @@ export default {
         }
       }).catch(() => {
         this.isLoading = false;
-        this.error = 'Failed to fetch form data.';
+        this.form = {};
       })
     },
     updateForm: function() {
@@ -132,22 +131,15 @@ export default {
       })
     },
     submitForm: function() {
-      alert('Submit', JSON.stringify(this.form, null, 2));
-
-      // axios.post(backendURL + '/forms/1/submissions', {
-      //   form_title: this.form.title,
-      //   fields_json: this.from.fields_json,
-      //   answers_json: this.answers_json,
-      // })
-      // .then(() => {
-      //   this.error = null
-      //   this.alert = 'Successfully saved changes.'
-      // })
-      // .catch(err => {
-      //   const res = err.response;
-      //   this.alert = null
-      //   this.error = `Error: ${res.data.message}`;
-      // })
+      axios.post(backendURL + '/forms/1/submissions', this.form)
+      .then(() => {
+        this.error = null
+        this.alert = 'Successfully sent answers!'
+      })
+      .catch(err => {
+        this.alert = null
+        this.error = `Error: ${err.response.data.message}`;
+      })
     },
     addField: function() {
       this.form.fields_json = this.form.fields_json || [];

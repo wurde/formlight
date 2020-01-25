@@ -9,16 +9,14 @@ function require_body(keys) {
     if (!req.body || Object.keys(req.body).length === 0) {
       return res
         .status(400)
-        .json({ error: { message: "Missing request body" } });
+        .json({ message: "Missing request body" });
     }
 
     let missing_keys = keys.filter(key => !Object.keys(req.body).includes(key));
 
     if (missing_keys.length > 0) {
       return res.status(422).json({
-        error: {
-          message: `Missing fields: ${missing_keys.join(" ")}`
-        }
+        message: `Missing fields: ${missing_keys.join(" ")}`
       });
     }
 

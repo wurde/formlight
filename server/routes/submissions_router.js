@@ -23,7 +23,7 @@ const router = express.Router({ mergeParams: true });
 // GET,POST /forms/:form_id/submissions
 router.route("/submissions")
   .get(SubmissionsController.index)
-  .all(require_body(['form_title']))
+  .all(require_body(['title']))
   .post(SubmissionsController.create)
 
 // GET,PUT,PATCH,DELETE /forms/:form_id/submissions/:id

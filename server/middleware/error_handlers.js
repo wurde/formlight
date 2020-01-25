@@ -18,10 +18,8 @@ function server_error_catch(err, req, res, next) {
   console.error(err.message);
 
   res.status(err.status).json({
-    error: {
-      status: err.status,
-      message: err.message
-    }
+    status: err.status,
+    message: err.message
   });
 }
 
