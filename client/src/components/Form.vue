@@ -21,8 +21,8 @@
         <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
           <div class="row">
             <div class="col d-flex-1">
-              <input v-bind:ref="'field-' + index"
-                    v-bind:id="'field-' + index"
+              <input v-bind:ref="'update-field-' + index"
+                    v-bind:id="'update-field-' + index"
                     v-bind:type="field.type"
                     v-bind:name="fieldName(field.label)"
                     v-bind:value="field.label"
@@ -56,18 +56,16 @@
       <div v-show="error" class="errors">{{error}}</div>
       <div v-show="alert" class="alert">{{alert}}</div>
 
-      <!--
       <form @submit.prevent="submitForm">
-        <div v-for="(field, index) in from.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
-          <label v-bind:for="'field-' + index" v-bind:class="{ 'text-danger':  hasError}">{{ field.label }}</label>
-          <input v-bind:id="'field-' + index" v-bind:type="field.type" v-bind:name="fieldName(field.label)" v-bind:class="{ 'input-danger': hasError }" />
+        <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
+          <label v-bind:for="'submit-field-' + index" v-bind:class="{ 'text-danger':  hasError}">{{ field.label }}</label>
+          <input v-bind:id="'submit-field-' + index" v-bind:type="field.type" v-bind:name="fieldName(field.label)" v-bind:class="{ 'input-danger': hasError }" />
         </div>
 
-        <button type="submit" class="btn-submit">
+        <button type="submit" class="btn-submit" tabindex="0">
           Submit
         </button>
       </form>
-      -->
     </div>
 
     <nav>
@@ -150,7 +148,7 @@ export default {
       const length = this.form.fields_json.length
       const lastField = this.form.fields_json[length - 1]
       if (lastField && lastField.label.length == 0) {
-        document.getElementById('field-' + (length - 1)).focus();
+        document.getElementById('update-field-' + (length - 1)).focus();
         return
       }
 
