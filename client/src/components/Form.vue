@@ -6,10 +6,16 @@
       <div v-show="error" class="errors">{{error}}</div>
       <div v-show="alert" class="alert">{{alert}}</div>
 
-      <form @submit.prevent="submit">
+      <form @submit.prevent="submitUpdateForm">
         <div class="form-group">
           <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
           <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="title" autofocus />
+        </div>
+
+        <h4>Fields</h4>
+
+        <div v-for="(field, index) in fields" v-bind:key="fieldName(field.label)" class="form-group">
+          <input v-bind:id="'field-' + index" v-bind:type="field.type" v-bind:name="fieldName(field.label)" v-bind:value="field.label" v-bind:class="{ 'input-danger': hasError }" />
         </div>
 
         <div class="row">
@@ -26,6 +32,20 @@
 
     <div v-show="!isEditing" class="display">
       <h3>{{title}}</h3>
+
+      <div v-show="error" class="errors">{{error}}</div>
+      <div v-show="alert" class="alert">{{alert}}</div>
+
+      <form @submit.prevent="submitForm">
+        <div v-for="(field, index) in fields" v-bind:key="fieldName(field.label)" class="form-group">
+          <label v-bind:for="'field-' + index" v-bind:class="{ 'text-danger':  hasError}">{{ field.label }}</label>
+          <input v-bind:id="'field-' + index" v-bind:type="field.type" v-bind:name="fieldName(field.label)" v-bind:class="{ 'input-danger': hasError }" />
+        </div>
+
+        <button type="submit" class="btn-submit">
+          Submit
+        </button>
+      </form>
     </div>
 
     <nav>
@@ -44,7 +64,8 @@ export default {
   props: ['isEditing'],
   data: function() {
     return {
-      title: 'ExampleForm',
+      title: 'Applicant Survey',
+      fields: [{ 'type': 'text', 'label': 'Name' }],
       error: null,
       alert: null
     }
@@ -52,11 +73,17 @@ export default {
   computed: {
     hasError: function() {
       return this.error !== null ? true : false;
+    },
+    fieldID: function() {
+      return `field-${ this.index }`
     }
   },
   methods: {
-    submit: function() {
-      axios.post(backendURL + '/forms', { title: this.title })
+    submitUpdateForm: function() {
+      axios.post(backendURL + '/forms', {
+        title: this.title,
+        fields_json: this.fields_json,
+      })
       .then(() => {
         this.error = null
         this.alert = 'Successfully saved changes.'
@@ -67,8 +94,29 @@ export default {
         this.error = `Error: ${res.data.message}`;
       })
     },
-    addField: function(e) {
-      alert(e.target.tagName)
+    submitForm: function() {
+      axios.post(backendURL + '/forms/1/submissions', {
+        form_title: this.form_title,
+        fields_json: this.fields_json,
+        answers_json: this.answers_json,
+      })
+      .then(() => {
+        this.error = null
+        this.alert = 'Successfully saved changes.'
+      })
+      .catch(err => {
+        const res = err.response;
+        this.alert = null
+        this.error = `Error: ${res.data.message}`;
+      })
+    },
+    addField: function() {
+      this.fields = this.fields.push({
+        'type': 'text', 'label': 'Hello'
+      })
+    },
+    fieldName: function(label) {
+      return label.replace(' ', '-').toLowerCase()
     }
   }
 }
