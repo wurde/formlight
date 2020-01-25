@@ -31,7 +31,7 @@
                     v-focus />
             </div>
             <div class="col d-flex-0 d-flex center">
-              <button type="button" v-on:click.prevent="removeField" class="btn-remove-field text-danger py-10 px-20" tabindex="0">
+              <button type="button" v-on:click.prevent="removeField(index, $event)" class="btn-remove-field text-danger py-10 px-20" tabindex="0">
                 <i class="fa fa-minus-circle"></i>
               </button>
             </div>
@@ -118,9 +118,6 @@ export default {
       //   this.error = 'Failed to fetch form data.';
       // })
     },
-    removeField: function() {
-      alert('removeField');
-    },
     updateForm: function() {
       axios.patch(backendURL + '/forms/1', this.form)
       .then(() => {
@@ -158,6 +155,9 @@ export default {
       }
 
       this.form.fields_json.push({ 'type': 'text', 'label': '' })
+    },
+    removeField: function(index) {
+      this.form.fields_json.splice(index, 1)
     },
     fieldName: function(label) {
       return label.replace(/ /g, '-').toLowerCase()
