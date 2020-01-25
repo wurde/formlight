@@ -19,14 +19,23 @@
         <label>Fields</label>
 
         <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
-          <input v-bind:ref="'field-' + index"
-                 v-bind:id="'field-' + index"
-                 v-bind:type="field.type"
-                 v-bind:name="fieldName(field.label)"
-                 v-bind:value="field.label"
-                 v-model="form.fields_json[index].label"
-                 v-bind:class="{ 'input-danger': hasError }"
-                 v-focus />
+          <div class="row">
+            <div class="col d-flex-1">
+              <input v-bind:ref="'field-' + index"
+                    v-bind:id="'field-' + index"
+                    v-bind:type="field.type"
+                    v-bind:name="fieldName(field.label)"
+                    v-bind:value="field.label"
+                    v-model="form.fields_json[index].label"
+                    v-bind:class="{ 'input-danger': hasError }"
+                    v-focus />
+            </div>
+            <div class="col d-flex-0 d-flex center">
+              <button type="button" v-on:click.prevent="removeField" class="btn-remove-field text-danger py-10 px-20" tabindex="0">
+                <i class="fa fa-minus-circle"></i>
+              </button>
+            </div>
+          </div>
         </div>
 
         <div class="row">
@@ -108,6 +117,9 @@ export default {
       //   this.isLoading = false;
       //   this.error = 'Failed to fetch form data.';
       // })
+    },
+    removeField: function() {
+      alert('removeField');
     },
     updateForm: function() {
       axios.patch(backendURL + '/forms/1', this.form)
@@ -241,6 +253,13 @@ button {
   color: #FFF;
 }
 
+.btn-remove-field {
+  color: #2c3e50;
+}
+.btn-remove-field:focus, .btn-remove-field:hover {
+  color: red;
+}
+
 .btn-submit {
   border: 3px dotted #CBDBEA;
   padding: 10px 16px;
@@ -257,5 +276,32 @@ button {
 .row {
   display: flex;
   padding: 10px 0px;
+}
+.col {
+  width: 100%;
+}
+
+.d-flex {
+  display: flex;
+}
+.d-flex-1 {
+  flex: 1;
+}
+.d-flex-0 {
+  flex: 0;
+}
+
+.py-10 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+.px-20 {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.center {
+  justify-content: center;
+  align-items: center;
 }
 </style>
