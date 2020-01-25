@@ -7,11 +7,13 @@
       <div v-show="alert" class="alert">{{alert}}</div>
 
       <form @submit.prevent="submit">
-        <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
-        <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="title" autofocus />
+        <div class="form-group">
+          <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
+          <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="title" autofocus />
+        </div>
 
         <div class="row">
-          <button @click.prevent="addField" class="btn-add-field">
+          <button type="button" v-on:click.prevent="addField" class="btn-add-field">
             <i class="fa fa-plus icon"></i>
           </button>
         </div>
@@ -65,8 +67,8 @@ export default {
         this.error = `Error: ${res.data.message}`;
       })
     },
-    addField: function() {
-      alert("add field")
+    addField: function(e) {
+      alert(e.target.tagName)
     }
   }
 }
