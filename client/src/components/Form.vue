@@ -10,7 +10,7 @@
       <div v-show="error" class="errors">{{error}}</div>
       <div v-show="alert" class="alert">{{alert}}</div>
 
-      <form @submit.prevent="updateForm">
+      <form @submit.prevent="createOrUpdateForm">
         <div class="form-group">
           <label for="form-title" v-bind:class="{ 'text-danger':  hasError}">Title</label>
           <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="form.title" autofocus />
@@ -116,18 +116,41 @@ export default {
         }
       }).catch(() => {
         this.isLoading = false;
-        this.form = {};
+        this.form = {
+          title: '',
+          fields_json: [],
+          answers: []
+        };
       })
     },
-    updateForm: function() {
-      axios.patch(backendURL + '/forms/1', this.form)
+    createOrUpdateForm: function() {
+      // Check if form exists
+      axios.get(backendURL + '/forms/1')
       .then(() => {
-        this.error = this.alert = null
-        this.alert = 'Successfully saved changes.'
-      })
-      .catch(err => {
-        this.alert = null
-        this.error = `Error: ${err.response.data.message}`;
+        alert('Update')
+        // Update form
+        axios.patch(backendURL + '/forms/1', this.form)
+        .then(() => {
+          this.error = this.alert = null
+          this.alert = 'Successfully saved changes.'
+        })
+        .catch(err => {
+          this.alert = null
+          this.error = `Error: ${err.response.data.message}`;
+        })
+
+      }).catch(() => {
+        alert('Create')
+        // Create new form
+        axios.post(backendURL + '/forms', this.form)
+        .then(() => {
+          this.error = this.alert = null
+          this.alert = 'Successfully saved changes.'
+        })
+        .catch(err => {
+          this.alert = null
+          this.error = `Error: ${err.response.data.message}`;
+        })
       })
     },
     submitForm: function() {
