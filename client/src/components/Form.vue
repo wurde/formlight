@@ -107,7 +107,10 @@ export default {
       .then(res => {
         this.isLoading = false;
         this.alert = 'Successfully fetched form data.';
-        this.form = res.data
+        this.form = {
+          title: res.data.title,
+          fields_json: JSON.parse(res.data.fields_json)
+        }
       }).catch(() => {
         this.isLoading = false;
         this.error = 'Failed to fetch form data.';
