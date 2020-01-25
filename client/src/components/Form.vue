@@ -106,7 +106,6 @@ export default {
       axios.get(backendURL + '/forms/1')
       .then(res => {
         this.isLoading = false;
-        this.alert = 'Successfully fetched form data.';
         this.form = {
           title: res.data.title,
           fields_json: JSON.parse(res.data.fields_json)
@@ -147,6 +146,7 @@ export default {
     },
     addField: function() {
       this.form.fields_json = this.form.fields_json || [];
+      this.alert = '';
 
       const length = this.form.fields_json.length
       const lastField = this.form.fields_json[length - 1]
@@ -158,6 +158,7 @@ export default {
       this.form.fields_json.push({ 'type': 'text', 'label': '' })
     },
     removeField: function(index) {
+      this.alert = '';
       this.form.fields_json.splice(index, 1)
     },
     fieldName: function(label) {
