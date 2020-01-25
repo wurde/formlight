@@ -58,8 +58,12 @@
 
       <form @submit.prevent="submitForm">
         <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
-          <label v-bind:for="'submit-field-' + index" v-bind:class="{ 'text-danger':  hasError}">{{ field.label }}</label>
-          <input v-bind:id="'submit-field-' + index" v-bind:type="field.type" v-bind:name="fieldName(field.label)" v-bind:class="{ 'input-danger': hasError }" />
+          <label v-bind:for="'submit-field-' + index"
+                 v-bind:class="{ 'text-danger':  hasError}">{{ field.label }}</label>
+          <input v-bind:id="'submit-field-' + index"
+                 v-bind:type="field.type" v-bind:name="fieldName(field.label)"
+                 v-model="form.answers[index]"
+                 v-bind:class="{ 'input-danger': hasError }" />
         </div>
 
         <button type="submit" class="btn-submit" tabindex="0">
@@ -108,7 +112,8 @@ export default {
         this.isLoading = false;
         this.form = {
           title: res.data.title,
-          fields_json: JSON.parse(res.data.fields_json)
+          fields_json: JSON.parse(res.data.fields_json),
+          answers: []
         }
       }).catch(() => {
         this.isLoading = false;
