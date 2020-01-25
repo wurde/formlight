@@ -103,18 +103,15 @@ export default {
       this.form = this.error = this.alert = null;
       this.isLoading = true;
 
-      this.alert = 'Successfully fetched data.';
-      this.form = { title: 'Applicant Survey', fields_json: [{ type: 'text', label: 'What is your favorite color?' }] }
-      this.isLoading = false;
-      // axios.get(backendURL + '/forms/1')
-      // .then(res => {
-      //   this.isLoading = false;
-      //   this.alert = 'Successfully fetched data.';
-      //   this.form = res.data
-      // }).catch(() => {
-      //   this.isLoading = false;
-      //   this.error = 'Failed to fetch form data.';
-      // })
+      axios.get(backendURL + '/forms/1')
+      .then(res => {
+        this.isLoading = false;
+        this.alert = 'Successfully fetched form data.';
+        this.form = res.data
+      }).catch(() => {
+        this.isLoading = false;
+        this.error = 'Failed to fetch form data.';
+      })
     },
     updateForm: function() {
       axios.patch(backendURL + '/forms/1', this.form)
@@ -129,6 +126,7 @@ export default {
     },
     submitForm: function() {
       alert('Submit', JSON.stringify(this.form, null, 2));
+
       // axios.post(backendURL + '/forms/1/submissions', {
       //   form_title: this.form.title,
       //   fields_json: this.from.fields_json,
@@ -145,6 +143,8 @@ export default {
       // })
     },
     addField: function() {
+      this.form.fields_json = this.form.fields_json || [];
+
       const length = this.form.fields_json.length
       const lastField = this.form.fields_json[length - 1]
       if (lastField && lastField.label.length == 0) {

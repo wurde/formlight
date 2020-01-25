@@ -49,8 +49,9 @@ class FormsController {
   static async update(req, res) {
     try {
       if (req.body.fields_json) {
-        const [id] = await Form.update(req.params.id, {
-          fields_json: req.body.fields_json
+        const id = await Form.update(req.params.id, {
+          title: req.body.title,
+          fields_json: JSON.stringify(req.body.fields_json)
         });
       }
 

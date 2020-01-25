@@ -21,10 +21,10 @@ class SubmissionsController {
 
   static async create(req, res) {
     try {
-      const [id] = await Submission.create({
+      const id = await Submission.create({
         form_title: req.body.form_title,
-        fields_json: req.body.fields_json,
-        answers_json: req.body.answers_json
+        fields_json: JSON.stringify(req.body.fields_json),
+        answers_json: JSON.stringify(req.body.answers_json)
       });
 
       const submission = await Submission.find(id);
