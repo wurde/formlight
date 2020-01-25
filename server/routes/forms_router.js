@@ -26,9 +26,9 @@ router.route("/forms")
   .all(require_body(['title']))
   .post(FormsController.create)
 
-// GET,PUT,PATCH,DELETE /forms/:id
-router.route("/forms/:id")
-  .all(require_record(Form.find, 'id'))
+// GET,PUT,PATCH,DELETE /forms/:title_ref
+router.route("/forms/:title_ref")
+  .all(require_record(Form.find, 'title_ref'))
   .get(FormsController.show)
   .put(FormsController.update)
   .patch(FormsController.update)

@@ -19,7 +19,7 @@ class FormsController {
 
   static async create(req, res) {
     try {
-      const [id] = await Form.create({
+      const id = await Form.create({
         title: req.body.title,
         fields_json: req.body.fields_json
       });

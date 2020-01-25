@@ -22,7 +22,7 @@ class Form {
   }
 
   static async create(params) {
-    if (!await this.uniqueTitle(params.title)) {
+    if (!await this.uniqueTitleRef(params.title_ref)) {
       const err = new Error()
       err.status = 400
       err.message = 'Title must be unique.'
@@ -58,8 +58,8 @@ class Form {
    * Validations
    */
 
-  static async uniqueTitle(title) {
-    const x = await db(table).where({ title }).first();
+  static async uniqueTitleRef(title_ref) {
+    const x = await db(table).where({ title_ref }).first();
     return x ? false : true
   }
 }
