@@ -24,7 +24,6 @@ export default {
 <style scoped>
 .submissions-section {
   padding: 15px;
-  border: 1px solid blue;
 }
 
 nav {
