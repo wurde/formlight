@@ -7,8 +7,6 @@
     <div v-if="!isLoading" v-show="isEditing" class="editable">
       <h3>Form</h3>
 
-      {{form}}
-
       <div v-show="error" class="errors">{{error}}</div>
       <div v-show="alert" class="alert">{{alert}}</div>
 
@@ -18,10 +16,11 @@
           <input id="form-title" type="text" name="title" v-bind:class="{ 'input-danger': hasError }" v-model="form.title" autofocus />
         </div>
 
-        <h4>Fields</h4>
+        <label>Fields</label>
 
         <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
-          <input v-bind:id="'field-' + index"
+          <input v-bind:ref="'field-' + index"
+                 v-bind:id="'field-' + index"
                  v-bind:type="field.type"
                  v-bind:name="fieldName(field.label)"
                  v-bind:value="field.label"
@@ -89,9 +88,6 @@ export default {
   computed: {
     hasError: function() {
       return this.error !== null ? true : false;
-    },
-    fieldID: function() {
-      return `field-${ this.index }`
     }
   },
   methods: {
@@ -141,10 +137,17 @@ export default {
       // })
     },
     addField: function() {
+      const length = this.form.fields_json.length
+      const lastField = this.form.fields_json[length - 1]
+      if (lastField && lastField.label.length == 0) {
+        document.getElementById('field-' + (length - 1)).focus();
+        return
+      }
+
       this.form.fields_json.push({ 'type': 'text', 'label': '' })
     },
     fieldName: function(label) {
-      return label.replace(' ', '-').toLowerCase()
+      return label.replace(/ /g, '-').toLowerCase()
     }
   },
   directives: {
