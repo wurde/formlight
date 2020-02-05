@@ -94,6 +94,7 @@ export default {
     }
   },
   created: function() {
+    alert("fetchForm()");
     this.fetchForm();
   },
   computed: {
@@ -106,8 +107,10 @@ export default {
       this.form = this.error = this.alert = null;
       this.isLoading = true;
 
+      alert(backendURL + '/forms/1')
       axios.get(backendURL + '/forms/1')
       .then(res => {
+        alert("then.isLoading = false");
         this.isLoading = false;
         this.form = {
           title: res.data.title,
@@ -115,6 +118,7 @@ export default {
           answers: []
         }
       }).catch(() => {
+        alert("catch.isLoading = false");
         this.isLoading = false;
         this.form = {
           title: '',
