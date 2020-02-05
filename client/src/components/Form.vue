@@ -94,7 +94,6 @@ export default {
     }
   },
   created: function() {
-    alert("fetchForm()");
     this.fetchForm();
   },
   computed: {
@@ -107,10 +106,8 @@ export default {
       this.form = this.error = this.alert = null;
       this.isLoading = true;
 
-      alert(backendURL + '/forms/1')
       axios.get(backendURL + '/forms/1')
       .then(res => {
-        alert("then.isLoading = false");
         this.isLoading = false;
         this.form = {
           title: res.data.title,
@@ -118,7 +115,6 @@ export default {
           answers: []
         }
       }).catch(() => {
-        alert("catch.isLoading = false");
         this.isLoading = false;
         this.form = {
           title: '',
@@ -131,7 +127,6 @@ export default {
       // Check if form exists
       axios.get(backendURL + '/forms/1')
       .then(() => {
-        alert('Update')
         // Update form
         axios.patch(backendURL + '/forms/1', this.form)
         .then(() => {
@@ -144,7 +139,6 @@ export default {
         })
 
       }).catch(() => {
-        alert('Create')
         // Create new form
         axios.post(backendURL + '/forms', this.form)
         .then(() => {

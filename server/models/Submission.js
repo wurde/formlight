@@ -27,10 +27,9 @@ class Submission {
   }
 
   static find(id) {
-    console.log("FIND", id)
     return db(table)
       .where({ id })
-      .first('id');
+      .first();
   }
 
   static update(id, params) {

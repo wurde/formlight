@@ -6,9 +6,6 @@ exports.up = function(knex) {
     t.text("title")
       .notNullable()
       .unique();
-    t.text("title_ref")
-      .notNullable()
-      .unique();
     t.text('fields_json');
   })
 };
