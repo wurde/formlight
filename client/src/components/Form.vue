@@ -114,7 +114,6 @@ export default {
           fields_json: JSON.parse(res.data.fields_json) || [],
           answers: []
         }
-        alert(res.data.fields_json);
       }).catch(() => {
         this.isLoading = false;
         this.form = {
@@ -141,7 +140,6 @@ export default {
 
       }).catch(() => {
         // Create new form
-        alert(JSON.stringify(this.form))
         axios.post(backendURL + '/forms', this.form)
         .then(() => {
           this.error = this.alert = null
