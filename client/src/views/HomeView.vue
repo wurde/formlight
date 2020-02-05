@@ -18,7 +18,7 @@ export default {
   },
   data: function() {
     return {
-      isEditing: true
+      isEditing: localStorage.getItem("isEditing") == "true" || false
     }
   },
   computed: {
@@ -31,9 +31,13 @@ export default {
       window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
     },
     toggleIsEditing() {
+      localStorage.setItem("isEditing", !this.isEditing)
       this.isEditing = !this.isEditing
     },
   },
+  created() {
+    localStorage.setItem("isEditing", this.isEditing)
+  }
 }
 </script>
 
