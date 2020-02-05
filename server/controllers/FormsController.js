@@ -19,9 +19,11 @@ class FormsController {
 
   static async create(req, res) {
     try {
+      await Form.clearAll();
+
       const id = await Form.create({
         title: req.body.title,
-        fields_json: req.body.fields_json
+        fields_json: JSON.stringify(req.body.fields_json)
       });
 
       const form = await Form.find(id);
@@ -38,7 +40,6 @@ class FormsController {
 
   static async show(req, res) {
     try {
-      console.log("FormsController.show", req.params.id);
       const form = await Form.find(req.params.id);
       res.status(200).json(form);
     } catch (err) {
