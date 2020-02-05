@@ -28,13 +28,21 @@ export default new Router({
     {
       name: "HomeView",
       path: "/",
-      component: HomeView
+      component: HomeView,
+      beforeEnter: (to, from, next) => {
+        if (localStorage.getItem("formUser")) {
+          next();
+        } else {
+          next("/login");
+        }
+      }
     },
     {
       name: "LoginView",
       path: "/login",
       component: LoginView
     },
+    { path: "/signin", redirect: "/login" },
     {
       // This matches everything. A catch-all to render a 404 page.
       name: "NotFoundView",

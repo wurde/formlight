@@ -1,13 +1,11 @@
-/**
- * Assertions
- */
-
 describe("Form", () => {
   beforeEach(() => {
-    cy.visit("/");
+    localStorage.clear();
+    cy.login("Andy");
   });
 
   it("has ability to set form title", () => {
+    cy.visit("/");
     cy.get("main");
     cy.get(".a-see-submissions").should("be.visible");
     cy.get(".a-see-form").should("be.hidden");

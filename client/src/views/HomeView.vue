@@ -1,6 +1,7 @@
 <template>
   <div id="home">
     <h3>Home</h3>
+    <a @click="signout" href="#">Sign out</a>
     <Header v-bind:isEditing="isEditing" v-on:toggleIsEditing="toggleIsEditing" />
     <Main v-bind:isEditing="isEditing" />
   </div>
@@ -33,6 +34,10 @@ export default {
     },
     toggleIsEditing() {
       this.isEditing = !this.isEditing
+    },
+    signout() {
+      localStorage.clear();
+      this.$router.push("/login");
     }
   },
 }

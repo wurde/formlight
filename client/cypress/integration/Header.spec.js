@@ -1,13 +1,11 @@
-/**
- * Assertions
- */
-
 describe("Header", () => {
   beforeEach(() => {
-    cy.visit("/");
+    localStorage.clear();
+    cy.login("Andy");
   });
 
   it("has a view toggle facility", () => {
+    cy.visit("/");
     cy.get(".header");
     cy.get(".fa-file-alt").should("be.visible");
     cy.get(".fa-edit").should("be.hidden");
