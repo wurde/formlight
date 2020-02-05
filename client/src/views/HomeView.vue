@@ -1,6 +1,5 @@
 <template>
   <div id="home">
-    <h3>Welcome {{formUser}}! <small>(<a @click="signout" href="#">Sign out</a>)</small></h3>
     <Header v-bind:isEditing="isEditing" v-on:toggleIsEditing="toggleIsEditing" />
     <Main v-bind:isEditing="isEditing" />
   </div>
@@ -19,8 +18,7 @@ export default {
   },
   data: function() {
     return {
-      isEditing: true,
-      formUser: localStorage.getItem('formUser')
+      isEditing: true
     }
   },
   computed: {
@@ -35,10 +33,9 @@ export default {
     toggleIsEditing() {
       this.isEditing = !this.isEditing
     },
-    signout() {
-      localStorage.clear();
-      this.$router.push("/login");
-    }
   },
 }
 </script>
+
+<style scoped>
+</style>

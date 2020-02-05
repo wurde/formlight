@@ -1,4 +1,4 @@
-describe("Main", () => {
+describe("HomeView", () => {
   beforeEach(() => {
     localStorage.clear();
     cy.login("Andy");
