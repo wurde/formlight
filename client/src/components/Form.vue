@@ -79,8 +79,10 @@
 
 <script>
 import axios from 'axios';
+import config from '../config';
 
-const backendURL = 'http://localhost:3000';
+const env = process.env.NODE_ENV;
+const backendURL = config[env].backendUrl;
 
 export default {
   name: 'Form',
