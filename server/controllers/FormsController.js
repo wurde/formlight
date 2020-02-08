@@ -19,11 +19,9 @@ class FormsController {
 
   static async create(req, res) {
     try {
-      await Form.clearAll();
-
-      const id = await Form.create({
+      const [id] = await Form.create({
         title: req.body.title,
-        fields_json: JSON.stringify(req.body.fields_json)
+        username: req.body.username
       });
 
       const form = await Form.find(id);

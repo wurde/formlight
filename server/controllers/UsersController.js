@@ -12,7 +12,7 @@ class UsersController {
       let user = await User.find(req.body.username);
 
       if (!user) {
-        const id = await User.create({
+        const [id] = await User.create({
           username: req.body.username
         });
 

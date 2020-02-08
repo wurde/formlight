@@ -4,14 +4,8 @@
 
     <div class="row">
       <ul class="list-style-none">
-        <li class="py-5">
-          <router-link to="/forms/1">Survey 1</router-link>
-        </li>
-        <li class="py-5">
-          <router-link to="/forms/2">Survey 2</router-link>
-        </li>
-        <li class="py-5">
-          <router-link to="/forms/3">Survey 3</router-link>
+        <li v-for="form in forms" :key="form.id" class="py-5">
+          <router-link :to="'/forms/' + form.id">{{form.title}}</router-link>
         </li>
       </ul>
     </div>
@@ -22,7 +16,7 @@
           {{error}}
         </div>
 
-        <input type="text" name="title" placeholder="Survey" v-model="form.title" />
+        <input type="text" name="title" placeholder="Survey" v-model="title" />
         <button type="submit" class="btn-add" tabindex="0">
           <i class="fa fa-plus icon"></i>
         </button>
@@ -44,7 +38,7 @@ export default {
     return {
       username: localStorage.getItem('username'),
       forms: [],
-      form: {},
+      title: null,
       error: null
     }
   },
@@ -64,9 +58,9 @@ export default {
 
       axios.post(backendUrl + "/forms", {
         username: this.username,
-        title: this.form.title
+        title: this.title
       }).then(res => {
-        alert(res);
+        this.$router.push("/forms/" + res.data.id);
       }).catch(err => {
         this.error = err.response.data.message;
       })

@@ -21,7 +21,7 @@ class SubmissionsController {
 
   static async create(req, res) {
     try {
-      const id = await Submission.create({
+      const [id] = await Submission.create({
         title: req.body.title,
         fields_json: JSON.stringify(req.body.fields_json),
         answers: JSON.stringify(req.body.answers)
