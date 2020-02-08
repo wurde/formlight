@@ -6,6 +6,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
+import FormListView from "../views/FormListView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 /**
@@ -13,6 +14,18 @@ import NotFoundView from "../views/NotFoundView.vue";
  */
 
 Vue.use(Router);
+
+/**
+ * Define navigation guards
+ */
+
+function requireLogin(to ,from, next) {
+  if (localStorage.getItem("formUser")) {
+    next();
+  } else {
+    next("/login");
+  }
+}
 
 /**
  * Define router
@@ -29,13 +42,13 @@ export default new Router({
       name: "HomeView",
       path: "/",
       component: HomeView,
-      beforeEnter: (to, from, next) => {
-        if (localStorage.getItem("formUser")) {
-          next();
-        } else {
-          next("/login");
-        }
-      }
+      beforeEnter: requireLogin
+    },
+    {
+      name: "FormListView",
+      path: "/forms",
+      component: FormListView,
+      beforeEnter: requireLogin
     },
     {
       name: "LoginView",
