@@ -1,11 +1,11 @@
-'use strict'
+"use strict"
 
 /**
  * Dependencies
  */
 
-const express = require('express');
-const UsersController = require('../controllers/UsersController');
+const express = require("express");
+const UsersController = require("../controllers/UsersController");
 const require_body = require("../middleware/require_body");
 
 /**
@@ -20,7 +20,7 @@ const router = express.Router();
 
 // POST /users
 router.route("/")
-  .all(require_body(['username']))
+  .all(require_body(["username"]))
   .post(UsersController.findOrCreate);
 
 /**

@@ -6,7 +6,7 @@ exports.up = function(knex) {
     t.text("title").notNullable().unique();
     t.text("username").notNullable();
     t.text("fields_json");
-    t.timestamps();
+    t.timestamps(true, true);
 
     t.foreign("username")
       .references("username")

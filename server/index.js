@@ -1,12 +1,12 @@
-'use strict'
+"use strict"
 
 /**
  * Dependencies
  */
 
-const express = require('express');
-const helmet = require('helmet');
-const cors = require('cors');
+const express = require("express");
+const helmet = require("helmet");
+const cors = require("cors");
 
 /**
  * Constants
@@ -32,15 +32,15 @@ app.use(express.json());
  * Mount routes
  */
 
-app.use(require('./routes/root_router'));
-app.use(require('./routes/users_router'));
-app.use(require('./routes/forms_router'));
+app.use(require("./routes/root_router"));
+app.use("/users", require("./routes/users_router"));
+app.use("/forms", require("./routes/forms_router"));
 
 /**
  * Mount error handlers
  */
 
-app.use(require('./middleware/error_handlers'));
+app.use(require("./middleware/error_handlers"));
 
 /**
  * Start server

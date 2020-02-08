@@ -5,7 +5,7 @@ exports.up = function(knex) {
     t.increments();
     t.text("form_title").notNullable();
     t.text("answers_json");
-    t.timestamps();
+    t.timestamps(true, true);
 
     t.foreign("form_title")
       .references("title")

@@ -3,7 +3,7 @@
 exports.up = function(knex) {
   return knex.schema.createTable("users", t => {
     t.text("username").notNullable().unique();
-    t.timestamps();
+    t.timestamps(true, true);
   })
 };
 

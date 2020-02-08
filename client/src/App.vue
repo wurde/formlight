@@ -54,6 +54,10 @@ export default {
 * {
   box-sizing: border-box;
 }
+
+.text-error {
+  color: red;
+}
 </style>
 
 <style scoped>

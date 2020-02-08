@@ -4,6 +4,10 @@
       <h1>Login</h1>
 
       <form @submit="loginForm" method="post">
+        <div v-if="error" class="text-error">
+          {{error}}
+        </div>
+
         <div class="input-group">
           <input id="input-username" type="text" v-model="username" placeholder="Username" autofocus />
         </div>
@@ -14,18 +18,38 @@
 </template>
 
 <script>
+import axios from "axios";
+import config from "../config";
+
+const env = process.env.NODE_ENV;
+const backendURL = config[env].backendUrl;
+
 export default {
   name: "LoginView",
   data: () => {
     return {
-      "username": ''
+      "username": '',
+      error: null
     }
   },
   methods: {
     loginForm(e) {
       e.preventDefault();
-      localStorage.setItem("formUser", this.username);
-      this.$router.push("/");
+
+      if (this.username.length == 0) {
+        this.error = "Username is required";
+        return
+      } else {
+        this.error = null;
+      }
+
+      axios.post(backendURL + "/users", { username: this.username })
+      .then(() => {
+        localStorage.setItem("formUser", this.username);
+        this.$router.push("/");
+      }).catch(err => {
+        this.error = err.response.data.message;
+      })
     }
   }
 }

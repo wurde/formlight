@@ -1,11 +1,11 @@
-'use strict'
+"use strict"
 
 /**
  * Dependencies
  */
 
-const express = require('express');
-const RootController = require('../controllers/RootController');
+const express = require("express");
+const RootController = require("../controllers/RootController");
 
 /**
  * Define router
