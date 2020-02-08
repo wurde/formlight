@@ -45,7 +45,7 @@ export default {
 
       axios.post(backendURL + "/users", { username: this.username })
       .then(() => {
-        localStorage.setItem("formUser", this.username);
+        localStorage.setItem("username", this.username);
         this.$router.push("/");
       }).catch(err => {
         this.error = err.response.data.message;
@@ -105,38 +105,5 @@ form {
   background-color: #FDFDFE;
   border: 1px solid #DDD;
   padding: 25px;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
-.justify-content-center {
-  justify-content: center;
-}
-.text-align-center {
-  text-align: center;
-}
-.input-group {
-  display: block;
-  width: 100%;
-  magrin-bottom: 1.2rem;
-}
-
-@media (min-width: 576px) {
-  main { width: 90%; }
-}
-
-@media (min-width: 768px) {
-  main { width: 80%; }
-}
-
-@media (min-width: 992px) {
-  main { width: 60%; }
-}
-
-@media (min-width: 1200px) {
-  main { width: 40%; }
 }
 </style>

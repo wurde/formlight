@@ -12,7 +12,7 @@ import FormListLink from '../components/FormListLink.vue';
 import Main from '../components/Main.vue';
 
 export default {
-  name: "HomeView",
+  name: "FormView",
   // Tip: avoid mistake of passing an array to "components".
   components: {
     Header,

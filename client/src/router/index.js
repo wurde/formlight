@@ -4,9 +4,10 @@
 
 import Vue from "vue";
 import Router from "vue-router";
-import HomeView from "../views/HomeView.vue";
-import LoginView from "../views/LoginView.vue";
+
 import FormListView from "../views/FormListView.vue";
+import FormView from "../views/FormView.vue";
+import LoginView from "../views/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
 
 /**
@@ -19,11 +20,34 @@ Vue.use(Router);
  * Define navigation guards
  */
 
-function requireLogin(to ,from, next) {
-  if (localStorage.getItem("formUser")) {
-    next();
-  } else {
+function beforeFormListView(to, from, next) {
+  const username = localStorage.getItem("username");
+
+  if (!username) {
     next("/login");
+  } else {
+    const formId = localStorage.getItem("form");
+    if (formId) {
+      next(`/forms/${formId}`);
+    } else {
+      next();
+    }
+  }
+}
+
+function beforeLoginView(to, from, next) {
+  if (localStorage.getItem("username")) {
+    next("/");
+  } else {
+    next();
+  }
+}
+
+function beforeFormView(to, from, next) {
+  if (!localStorage.getItem("username")) {
+    next("/login");
+  } else {
+    next();
   }
 }
 
@@ -38,22 +62,24 @@ export default new Router({
   // default mode is "hash" mode using # in URL.
   mode: "history",
   routes: [
-    {
-      name: "HomeView",
-      path: "/",
-      component: HomeView,
-      beforeEnter: requireLogin
-    },
+    { path: "/", redirect: "/forms" },
     {
       name: "FormListView",
       path: "/forms",
       component: FormListView,
-      beforeEnter: requireLogin
+      beforeEnter: beforeFormListView
+    },
+    {
+      name: "FormView",
+      path: "/forms/:id",
+      component: FormView,
+      beforeEnter: beforeFormView
     },
     {
       name: "LoginView",
       path: "/login",
-      component: LoginView
+      component: LoginView,
+      beforeEnter: beforeLoginView
     },
     { path: "/signin", redirect: "/login" },
     {

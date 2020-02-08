@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <h3>Welcome {{formUser}}! <small>(<a @click="signout" href="#">Sign out</a>)</small></h3>
+    <h3>Welcome {{username}}! <small>(<a @click="signout" href="#">Sign out</a>)</small></h3>
     <div class="text-align-right float-right">
       <i v-show="isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-file-alt icon" tabindex="0"></i>
       <i v-show="!isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-edit icon" tabindex="0"></i>
@@ -14,7 +14,7 @@ export default {
   props: ['isEditing'],
   data: function() {
     return {
-      formUser: localStorage.getItem('formUser')
+      username: localStorage.getItem('username')
     }
   },
   methods: {

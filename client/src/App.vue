@@ -89,6 +89,7 @@ nav {
 
 a {
   text-decoration: underline;
+  color: inherit;
   cursor: pointer;
   padding: 10px 16px;
   padding-left: 0px;
@@ -180,6 +181,10 @@ a:focus, a:hover {
   padding-top: 10px;
   padding-bottom: 10px;
 }
+.py-5 {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 .px-20 {
   padding-left: 20px;
   padding-right: 20px;
@@ -190,6 +195,43 @@ a:focus, a:hover {
   align-items: center;
 }
 
+.list-style-none {
+  list-style: none;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+.justify-content-center {
+  justify-content: center;
+}
+.text-align-center {
+  text-align: center;
+}
+.input-group {
+  display: block;
+  width: 100%;
+  magrin-bottom: 1.2rem;
+}
+
+@media (min-width: 576px) {
+  main { width: 90%; }
+}
+
+@media (min-width: 768px) {
+  main { width: 80%; }
+}
+
+@media (min-width: 992px) {
+  main { width: 60%; }
+}
+
+@media (min-width: 1200px) {
+  main { width: 40%; }
+}
 </style>
 
 <style scoped>
