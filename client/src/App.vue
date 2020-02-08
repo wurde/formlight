@@ -2,7 +2,10 @@
 
 <template>
   <div id="app">
-    <transition name="router-anim">
+    <transition name="router-anim"
+                @beforeLeave="beforeLeave"
+                @enter="enter"
+                @afterEnter="afterEnter">
       <!-- Component matched by the route will render here -->
       <router-view></router-view>
     </transition>
@@ -11,7 +14,29 @@
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  data() {
+    return {
+      prevHeight: 0,
+    };
+  },
+  methods: {
+    beforeLeave(element) {
+      this.prevHeight = getComputedStyle(element).height;
+    },
+    enter(element) {
+      const { height } = getComputedStyle(element);
+
+      element.style.height = this.prevHeight;
+
+      setTimeout(() => {
+        element.style.height = height;
+      });
+    },
+    afterEnter(element) {
+      element.style.height = 'auto';
+    },
+  },
 };
 </script>
 
@@ -29,20 +54,15 @@ export default {
 * {
   box-sizing: border-box;
 }
-
-.page {
-  position: fixed;
-  width: inherit;
-}
 </style>
 
 <style scoped>
 .router-anim-enter-active {
   animation: fadeInDown 1s;
-  animation-duration: 0.7s;
+  animation-duration: 1s;
 }
 .router-anim-leave-active {
   animation: fadeOutDown 1s;
-  animation-duration: 0.3s;
+  animation-duration: 0.4s;
 }
 </style>
