@@ -33,6 +33,7 @@ app.use(express.json());
  */
 
 app.use(require('./routes/root_router'));
+app.use(require('./routes/users_router'));
 app.use(require('./routes/forms_router'));
 
 /**
