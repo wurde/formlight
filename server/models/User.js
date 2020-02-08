@@ -10,49 +10,43 @@ const db = require('../db/client');
  * Constants
  */
 
-const table = 'forms';
+const table = 'users';
 
 /**
  * Define model
  */
 
-class Form {
+class User {
   static all() {
     return db(table);
   }
 
   static async create(params) {
-    if (!await this.uniqueTitle(params.title)) {
+    if (!await this.uniqueUsername(params.username)) {
       const err = new Error()
       err.status = 400
-      err.message = 'Title must be unique.'
-      throw err
-    }
-    if (!params.username) {
-      const err = new Error()
-      err.status = 400
-      err.message = 'Username is required.'
+      err.message = 'Username must be unique.'
       throw err
     }
     return await db(table).insert(params);
   }
 
-  static find(id) {
+  static find(username) {
     return db(table)
-      .where({ id })
+      .where({ username })
       .first();
   }
 
-  static update(id, params) {
+  static update(username, params) {
     return db(table)
-      .where({ id })
+      .where({ username })
       .first()
       .update(params);
   }
 
-  static destroy(id) {
+  static destroy(username) {
     return db(table)
-      .where({ id })
+      .where({ username })
       .del();
   }
 
@@ -64,8 +58,8 @@ class Form {
    * Validations
    */
 
-  static async uniqueTitle(title) {
-    const x = await db(table).where({ title }).first();
+  static async uniqueUsername(username) {
+    const x = await db(table).where({ username }).first();
     return x ? false : true
   }
 }
@@ -74,4 +68,4 @@ class Form {
  * Export model
  */
 
-module.exports = Form;
+module.exports = User;

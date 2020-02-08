@@ -23,6 +23,12 @@ class Submission {
   }
 
   static create(params) {
+    if (!params.form_title) {
+      const err = new Error();
+      err.status = 400;
+      err.message = "Form title is required.";
+      throw err;
+    }
     return db(table).insert(params);
   }
 
