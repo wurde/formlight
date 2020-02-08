@@ -2,8 +2,10 @@
 
 <template>
   <div id="app">
-    <!-- Component matched by the route will render here -->
-    <router-view></router-view>
+    <transition name="router-anim">
+      <!-- Component matched by the route will render here -->
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
@@ -26,5 +28,21 @@ export default {
 
 * {
   box-sizing: border-box;
+}
+
+.page {
+  position: fixed;
+  width: inherit;
+}
+</style>
+
+<style scoped>
+.router-anim-enter-active {
+  animation: fadeInDown 1s;
+  animation-duration: 0.7s;
+}
+.router-anim-leave-active {
+  animation: fadeOutDown 1s;
+  animation-duration: 0.3s;
 }
 </style>

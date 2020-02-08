@@ -1,5 +1,5 @@
 <template>
-  <div id="not-found">
+  <div id="not-found" class="page">
     <h1>Not Found</h1>
     <router-link :to="{ name: 'HomeView' }">Go Home</router-link>
   </div>

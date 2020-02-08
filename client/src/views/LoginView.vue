@@ -1,5 +1,5 @@
 <template>
-  <main id="login">
+  <main id="login" class="page">
     <div class="container justify-content-center text-align-center">
       <h1>Login</h1>
 

@@ -1,5 +1,5 @@
 <template>
-  <div id="home">
+  <div id="home" class="page">
     <Header v-bind:isEditing="isEditing" v-on:toggleIsEditing="toggleIsEditing" />
     <Main v-bind:isEditing="isEditing" />
   </div>

@@ -51,7 +51,8 @@ export default {
     return {
       isLoading: false,
       submissions: [],
-      error: null
+      error: null,
+      show: true
     }
   },
   computed: {
@@ -136,4 +137,5 @@ table th {
 table td,th {
   padding: 5px;
 }
+
 </style>
