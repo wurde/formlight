@@ -1,42 +1,38 @@
 <template>
-  <div id="home" class="page">
-    <Header v-bind:isEditing="isEditing" v-on:toggleIsEditing="toggleIsEditing" />
-    <Main v-bind:isEditing="isEditing" />
+  <div id="form-list" class="page">
+    <h1>Forms</h1>
+
+    <div class="row">
+      <ul>
+        <li>Survey 1</li>
+        <li>Survey 2</li>
+        <li>Survey 3</li>
+      </ul>
+    </div>
+
+    <div class="row">
+      <form @submit.prevent="createList">
+        <input type="text" name="title" placeholder="Survey" v-model="form.title" />
+        <button type="button" @click.prevent="addForm" class="btn-add" tabindex="0">
+          <i class="fa fa-plus icon"></i>
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
-import Header from '../components/Header.vue';
-import Main from '../components/Main.vue';
-
 export default {
   name: "FormListView",
-  // Tip: avoid mistake of passing an array to "components".
-  components: {
-    Header,
-    Main
-  },
   data: function() {
     return {
-      isEditing: localStorage.getItem("isEditing") == "true" || false
-    }
-  },
-  computed: {
-    username() {
-      return this.$route.params.username
+      form: {}
     }
   },
   methods: {
-    goBack() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+    addForm() {
+      alert("addForm")
     },
-    toggleIsEditing() {
-      localStorage.setItem("isEditing", !this.isEditing)
-      this.isEditing = !this.isEditing
-    },
-  },
-  created() {
-    localStorage.setItem("isEditing", this.isEditing)
   }
 }
 </script>

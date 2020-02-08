@@ -1,12 +1,14 @@
 <template>
   <div id="home" class="page">
     <Header v-bind:isEditing="isEditing" v-on:toggleIsEditing="toggleIsEditing" />
+    <FormListLink />
     <Main v-bind:isEditing="isEditing" />
   </div>
 </template>
 
 <script>
 import Header from '../components/Header.vue';
+import FormListLink from '../components/FormListLink.vue';
 import Main from '../components/Main.vue';
 
 export default {
@@ -14,6 +16,7 @@ export default {
   // Tip: avoid mistake of passing an array to "components".
   components: {
     Header,
+    FormListLink,
     Main
   },
   data: function() {
