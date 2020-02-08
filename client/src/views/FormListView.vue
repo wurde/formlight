@@ -1,11 +1,20 @@
 <template>
-  <div id="form-list" class="page">
+  <div id="form-list" class="page" :key="componentKey">
     <h1>Forms</h1>
 
     <div class="row">
       <ul class="list-style-none">
-        <li v-for="form in forms" :key="form.id" class="py-5">
-          <router-link :to="'/forms/' + form.id">{{form.title}}</router-link>
+        <li v-for="form in forms" :key="form.id">
+          <div class="row">
+            <div class="col d-flex-1">
+              <router-link :to="'/forms/' + form.id">{{form.title}}</router-link>
+            </div>
+            <div class="col d-flex-0 d-flex center">
+              <button type="button" @click.prevent="removeForm(form.id)" class="btn-remove-field text-danger px-20" tabindex="0">
+                <i class="fa fa-minus-circle"></i>
+              </button>
+            </div>
+          </div>
         </li>
       </ul>
     </div>
@@ -36,6 +45,7 @@ export default {
   name: "FormListView",
   data: function() {
     return {
+      componentKey: 0,
       username: localStorage.getItem('username'),
       forms: [],
       title: null,
@@ -65,6 +75,18 @@ export default {
         this.error = err.response.data.message;
       })
     },
+    removeForm(id) {
+      const yes = confirm("Are you sure? This action is permanent.")
+
+      if (yes) {
+        axios.delete(backendUrl + "/forms/" + id)
+        .then(() => {
+          this.fetchForms();
+        }).catch(err => {
+          this.error = err.response.data.message;
+        })
+      }
+    }
   },
   created() {
     this.fetchForms();
