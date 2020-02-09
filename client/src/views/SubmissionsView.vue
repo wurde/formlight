@@ -35,7 +35,7 @@
         </div>
 
         <div v-else>
-          <h3>No submissions yet.</h3>
+          <Heading type="h3" text="No submissions yet" />
         </div>
       </div>
     </section>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import Heading from '../components/Heading.vue';
 import Header from '../components/Header.vue';
 import FormListLink from '../components/FormListLink.vue';
 import FormTitleHeader from '../components/FormTitleHeader.vue';
@@ -55,6 +56,7 @@ const backendUrl = config[env].backendUrl;
 export default {
   name: "FormView",
   components: {
+    Heading,
     Header,
     FormListLink,
     FormTitleHeader,

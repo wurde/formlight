@@ -2,8 +2,9 @@
   <header>
     <div class="row py-0">
       <div class="col-90 d-flex-1">
-        <h1 class="form-title">{{formTitle}}</h1>
+        <Heading type="h1" class="form-title" v-bind:text="formTitle" />
       </div>
+
       <div class="col-10 d-flex-0 d-flex justify-content-center align-self-flex-end">
         <button type="button" v-on:click.prevent="removeForm(index, $event)" class="btn-remove-field text-danger py-10 px-20" tabindex="0">
           <i class="fa fa-trash"></i>
@@ -16,14 +17,18 @@
 </template>
 
 <script>
-import config from '../config';
-import axios from 'axios';
+import Heading from "../components/Heading.vue";
+import config from "../config";
+import axios from "axios";
 
 const env = process.env.NODE_ENV;
 const backendUrl = config[env].backendUrl;
 
 export default {
   name: "FormTitleHeader",
+  components: {
+    Heading
+  },
   data: function() {
     return {
       formTitle: localStorage.getItem("formTitle")
