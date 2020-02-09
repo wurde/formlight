@@ -4,6 +4,8 @@
       Loading...
     </div>
 
+    {{ $route.params.id }}
+
     <div v-if="!isLoading" v-show="isEditing" class="editable">
       <h3>Form</h3>
 

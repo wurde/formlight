@@ -7,7 +7,12 @@
 
 <script>
 export default {
-  name: "NotFoundView"
+  name: "NotFoundView",
+  data: function() {
+    return {
+      username: localStorage.getItem('username')
+    }
+  }
 }
 </script>
 

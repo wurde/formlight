@@ -6,14 +6,9 @@
       <ul class="list-style-none">
         <li v-for="form in forms" :key="form.id">
           <div class="row">
-            <div class="col d-flex-1">
-              <router-link :to="'/forms/' + form.id">{{form.title}}</router-link>
-            </div>
-            <div class="col d-flex-0 d-flex center">
-              <button type="button" @click.prevent="removeForm(form.id)" class="btn-remove-field text-danger px-20" tabindex="0">
-                <i class="fa fa-minus-circle"></i>
-              </button>
-            </div>
+            <router-link :to="'/forms/' + form.id">
+              <span @click="() => clickFormLink(form)" v-bind:form="form">{{form.title}}</span>
+            </router-link>
           </div>
         </li>
       </ul>
@@ -25,7 +20,7 @@
           {{error}}
         </div>
 
-        <input type="text" name="title" placeholder="Survey" v-model="title" />
+        <input type="text" name="title" placeholder="Add a new form" v-model="title" />
         <button type="submit" class="btn-add" tabindex="0">
           <i class="fa fa-plus icon"></i>
         </button>
@@ -69,23 +64,14 @@ export default {
       axios.post(backendUrl + "/forms", {
         username: this.username,
         title: this.title
-      }).then(res => {
-        this.$router.push("/forms/" + res.data.id);
+      }).then(() => {
+        this.fetchForms();
       }).catch(err => {
         this.error = err.response.data.message;
       })
     },
-    removeForm(id) {
-      const yes = confirm("Are you sure? This action is permanent.")
-
-      if (yes) {
-        axios.delete(backendUrl + "/forms/" + id)
-        .then(() => {
-          this.fetchForms();
-        }).catch(err => {
-          this.error = err.response.data.message;
-        })
-      }
+    clickFormLink(form) {
+      localStorage.setItem('formTitle', form.title)
     }
   },
   created() {

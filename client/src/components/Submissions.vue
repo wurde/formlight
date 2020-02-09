@@ -100,42 +100,5 @@ export default {
 .submissions-section {
   padding: 15px;
 }
-.alert-error {
-  color: red;
-}
-
-nav {
-  margin: 20px 0px;
-}
-
-a {
-  text-decoration: underline;
-  cursor: pointer;
-  padding: 10px 16px;
-  padding-left: 0px;
-}
-
-a:hover {
-  text-shadow: 0 5px 30px #EEC480;
-}
-
-table {
-  border: 1px solid #2c3e50;
-  width: 100%;
-  border-radius: 5px;
-}
-table tr:nth-child(even) {
-  background-color: #CBDBEA;
-}
-table tr:nth-child(odd) {
-  background-color: #fff;
-}
-table th {
-  color: white;
-  background-color: #2c3e50;
-}
-table td,th {
-  padding: 5px;
-}
 
 </style>

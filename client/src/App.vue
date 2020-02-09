@@ -91,13 +91,30 @@ a {
   text-decoration: underline;
   color: inherit;
   cursor: pointer;
-  padding: 10px 16px;
   padding-left: 0px;
   outline: none;
 }
-
 a:focus, a:hover {
   text-shadow: 0 5px 30px #EEC480;
+}
+
+table {
+  border: 1px solid #2c3e50;
+  width: 100%;
+  border-radius: 5px;
+}
+table tr:nth-child(even) {
+  background-color: #CBDBEA;
+}
+table tr:nth-child(odd) {
+  background-color: #fff;
+}
+table th {
+  color: white;
+  background-color: #2c3e50;
+}
+table td,th {
+  padding: 5px;
 }
 
 .text-error {
@@ -118,6 +135,9 @@ a:focus, a:hover {
   color: #007149;
   font-weight: bold;
   padding-bottom: 10px;
+}
+.alert-error {
+  color: red;
 }
 
 .text-danger {
@@ -166,6 +186,12 @@ a:focus, a:hover {
 .col {
   width: 100%;
 }
+.col-90 {
+  width: 90%;
+}
+.col-10 {
+  width: 10%;
+}
 
 .d-flex {
   display: flex;
@@ -177,6 +203,10 @@ a:focus, a:hover {
   flex: 0;
 }
 
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
 .py-10 {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -207,6 +237,9 @@ a:focus, a:hover {
 }
 .justify-content-center {
   justify-content: center;
+}
+.align-self-flex-end {
+  align-self: flex-end;
 }
 .text-align-center {
   text-align: center;
