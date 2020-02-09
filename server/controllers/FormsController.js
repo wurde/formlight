@@ -1,6 +1,7 @@
 'use strict'
 
 const Form = require('../models/Form');
+const Submission = require('../models/Submission');
 
 /**
  * Define controller
@@ -56,6 +57,8 @@ class FormsController {
       }
 
       const form = await Form.find(req.params.id);
+
+      await Submission.removeByForm(form.title);
 
       res.status(200).json(form);
     } catch (err) {

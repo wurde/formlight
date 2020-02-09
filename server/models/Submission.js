@@ -38,6 +38,10 @@ class Submission {
       .first();
   }
 
+  static removeByForm(form_title) {
+    return db(table).where({ form_title }).truncate();
+  }
+
   static clearAll() {
     return db(table).truncate();
   }
