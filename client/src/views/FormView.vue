@@ -102,11 +102,12 @@ export default {
         answers_json: this.answers_json
       })
       .then(() => {
-        this.error = null
-        this.alert = 'Successfully sent answers!'
+        this.error = null;
+        this.alert = 'Successfully sent answers!';
+        this.answers_json = [];
       })
       .catch(err => {
-        this.alert = null
+        this.alert = null;
         this.error = `Error: ${err.response.data.message}`;
       })
     },
