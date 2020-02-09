@@ -176,7 +176,14 @@ table td,th {
 }
 
 .icon {
+  font-size: 32px;
   padding: 10px 16px;
+  cursor: pointer;
+  outline: none;
+}
+
+.icon:focus, .icon:hover {
+  text-shadow: 0 5px 30px #EEC480;
 }
 
 .row {

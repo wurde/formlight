@@ -30,7 +30,6 @@ const backendUrl = config[env].backendUrl;
 
 export default {
   name: "FormView",
-  // Tip: avoid mistake of passing an array to "components".
   components: {
     Header,
     FormListLink,
@@ -60,6 +59,18 @@ export default {
       }).catch(err => {
         alert(err);
       })
+    },
+    removeForm() {
+      const yes = confirm("Are you sure? This action is permanent.")
+
+      if (yes) {
+        axios.delete(backendUrl + `/forms/${this.$route.params.id}`)
+        .then(() => {
+          this.$router.push('/forms');
+        }).catch(err => {
+          this.error = err.response.data.message;
+        })
+      }
     }
   },
   created() {

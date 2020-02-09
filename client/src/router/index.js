@@ -6,6 +6,7 @@ import Vue from "vue";
 import Router from "vue-router";
 
 import FormListView from "../views/FormListView.vue";
+import FormEditView from "../views/FormEditView.vue";
 import FormView from "../views/FormView.vue";
 import LoginView from "../views/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
@@ -19,6 +20,14 @@ Vue.use(Router);
 /**
  * Define navigation guards
  */
+
+function requireUsername(next) {
+  if (localStorage.getItem("username")) {
+    next("/");
+  } else {
+    next();
+  }
+}
 
 function beforeFormListView(to, from, next) {
   const username = localStorage.getItem("username");
@@ -35,12 +44,12 @@ function beforeFormListView(to, from, next) {
   }
 }
 
+function beforeFormEditView(to, from, next) {
+  requireUsername(next);
+}
+
 function beforeLoginView(to, from, next) {
-  if (localStorage.getItem("username")) {
-    next("/");
-  } else {
-    next();
-  }
+  requireUsername(next);
 }
 
 function beforeFormView(to, from, next) {
@@ -68,6 +77,12 @@ export default new Router({
       path: "/forms",
       component: FormListView,
       beforeEnter: beforeFormListView
+    },
+    {
+      name: "FormEditView",
+      path: "/forms/:id/edit",
+      component: FormEditView,
+      beforeEnter: beforeFormEditView
     },
     {
       name: "FormView",
