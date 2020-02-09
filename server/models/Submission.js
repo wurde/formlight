@@ -19,7 +19,7 @@ const table = 'submissions';
 class Submission {
   static all(title) {
     return db(table)
-      .where({ title });
+      .where({ form_title: title });
   }
 
   static create(params) {

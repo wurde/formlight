@@ -22,9 +22,8 @@ class SubmissionsController {
   static async create(req, res) {
     try {
       const [id] = await Submission.create({
-        title: req.body.title,
-        fields_json: JSON.stringify(req.body.fields_json),
-        answers: JSON.stringify(req.body.answers)
+        form_title: req.body.form_title,
+        answers_json: JSON.stringify(req.body.answers_json)
       });
 
       const submission = await Submission.find(id);
@@ -48,9 +47,9 @@ class SubmissionsController {
 
   static async update(req, res) {
     try {
-      if (req.body.answers) {
+      if (req.body.answers_json) {
         const [id] = await Submission.update(req.params.id, {
-          answers: req.body.answers
+          answers_json: req.body.answers_json
         });
       }
 

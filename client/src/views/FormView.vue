@@ -31,7 +31,7 @@
                   v-bind:class="{ 'text-danger':  hasError}">{{ field.label }}</label>
             <input v-bind:id="'submit-field-' + index"
                   v-bind:type="field.type" v-bind:name="fieldName(field.label)"
-                  v-model="form.answers[index]"
+                  v-model="answers_json[index]"
                   v-bind:class="{ 'input-danger': hasError }" />
           </div>
 
@@ -68,6 +68,7 @@ export default {
     return {
       isLoading: false,
       form: {},
+      answers_json: [],
       alert: null,
       error: null
     }
@@ -87,15 +88,19 @@ export default {
 
       axios.get(backendUrl + `/forms/${this.$route.params.id}`)
       .then(res => {
-        this.isLoading = false;
         this.form = res.data;
-      }).catch(err => {
+        this.form.fields_json = JSON.parse(this.form.fields_json);
         this.isLoading = false;
+      }).catch(err => {
         this.error = err.response.data.message;
+        this.isLoading = false;
       })
     },
     submitForm: function() {
-      axios.post(backendUrl + `/forms/${this.$route.params.id}/submissions`, this.form)
+      axios.post(backendUrl + `/forms/${this.$route.params.id}/submissions`, {
+        form_title: this.form.title,
+        answers_json: this.answers_json
+      })
       .then(() => {
         this.error = null
         this.alert = 'Successfully sent answers!'
@@ -106,6 +111,7 @@ export default {
       })
     },
     fieldName: function(label) {
+      if (!label) return '';
       return label.replace(/ /g, '-').toLowerCase()
     }
   },

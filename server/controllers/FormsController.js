@@ -39,6 +39,7 @@ class FormsController {
   static async show(req, res) {
     try {
       const form = await Form.find(req.params.id);
+      console.log({ form });
       res.status(200).json(form);
     } catch (err) {
       console.error(err);
@@ -50,7 +51,6 @@ class FormsController {
     try {
       if (req.body.fields_json) {
         const id = await Form.update(req.params.id, {
-          title: req.body.title,
           fields_json: JSON.stringify(req.body.fields_json)
         });
       }

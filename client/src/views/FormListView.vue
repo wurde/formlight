@@ -6,9 +6,7 @@
       <ul class="list-style-none">
         <li v-for="form in forms" :key="form.id">
           <div class="row">
-            <router-link :to="'/forms/' + form.id">
-              <span @click="() => clickFormLink(form)" v-bind:form="form">{{form.title}}</span>
-            </router-link>
+            <a href="#" @click="() => clickFormLink(form)">{{form.title}}</a>
           </div>
         </li>
       </ul>
@@ -72,6 +70,12 @@ export default {
     },
     clickFormLink(form) {
       localStorage.setItem('formTitle', form.title)
+
+      if (form.fields_json && form.fields_json.length > 0) {
+        this.$router.push("/forms/" + form.id);
+      } else {
+        this.$router.push("/forms/" + form.id + "/edit");
+      }
     }
   },
   created() {
@@ -79,6 +83,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

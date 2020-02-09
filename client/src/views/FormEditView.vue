@@ -30,7 +30,7 @@
         <div v-show="error" class="errors">{{error}}</div>
         <div v-show="alert" class="alert">{{alert}}</div>
 
-        <form @submit.prevent="createOrUpdateForm">
+        <form @submit.prevent="updateForm">
           <label>Fields</label>
 
           <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
@@ -80,7 +80,7 @@ const env = process.env.NODE_ENV;
 const backendUrl = config[env].backendUrl;
 
 export default {
-  name: "FormView",
+  name: "FormEditView",
   components: {
     Header,
     FormListLink,
@@ -105,45 +105,37 @@ export default {
   },
   methods: {
     fetchForm() {
+      this.form = this.error = this.alert = null;
+      this.isLoading = true;
+
       axios.get(backendUrl + `/forms/${this.$route.params.id}`)
       .then(res => {
         this.form = res.data;
-      }).catch(err => {
-        this.error = err.response.data.message;
+        this.form.fields_json = JSON.parse(this.form.fields_json);
+
+        if (!this.form.fields_json) this.form.fields_json = [];
+        this.form.fields_json.push({ 'type': 'text', 'label': '' });
+
+        this.isLoading = false;
+      }).catch(() => {
+        this.error = "An error occurred.";
+        this.isLoading = false;
       })
     },
-    createOrUpdateForm: function() {
-      alert(JSON.stringify(this.form))
-      // // Check if form exists
-      // axios.get(backendURL + '/forms/1')
-      // .then(() => {
-      //   // Update form
-      //   axios.patch(backendURL + '/forms/1', this.form)
-      //   .then(() => {
-      //     this.error = this.alert = null
-      //     this.alert = 'Successfully saved changes.'
-      //   })
-      //   .catch(err => {
-      //     this.alert = null
-      //     this.error = `Error: ${err.response.data.message}`;
-      //   })
-
-      // }).catch(() => {
-      //   // Create new form
-      //   axios.post(backendURL + '/forms', this.form)
-      //   .then(() => {
-      //     this.error = this.alert = null
-      //     this.alert = 'Successfully saved changes.'
-      //   })
-      //   .catch(err => {
-      //     this.alert = null
-      //     this.error = `Error: ${err.response.data.message}`;
-      //   })
-      // })
+    updateForm() {
+      axios.patch(backendUrl + `/forms/${this.$route.params.id}`, this.form)
+      .then(() => {
+        this.error = this.alert = null;
+        this.alert = 'Successfully saved changes.';
+      })
+      .catch(err => {
+        this.alert = null
+        this.error = `Error: ${err.response.data.message}`;
+      })
     },
-    addField: function() {
+    addField() {
       this.form.fields_json = this.form.fields_json || [];
-      this.alert = '';
+      this.alert = null;
 
       const length = this.form.fields_json.length
       const lastField = this.form.fields_json[length - 1]
@@ -154,11 +146,12 @@ export default {
 
       this.form.fields_json.push({ 'type': 'text', 'label': '' })
     },
-    removeField: function(index) {
+    removeField(index) {
       this.alert = '';
       this.form.fields_json.splice(index, 1)
     },
-    fieldName: function(label) {
+    fieldName(label) {
+      if (!label) return '';
       return label.replace(/ /g, '-').toLowerCase()
     }
   },
