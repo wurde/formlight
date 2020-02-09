@@ -1,7 +1,7 @@
 <template>
   <div id="not-found" class="page">
     <h1>Not Found</h1>
-    <router-link :to="{ name: 'HomeView' }">Go Home</router-link>
+    <router-link to="/">Go Home</router-link>
   </div>
 </template>
 
@@ -15,6 +15,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-</style>

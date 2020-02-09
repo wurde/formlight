@@ -21,14 +21,6 @@ Vue.use(Router);
  * Define navigation guards
  */
 
-function requireUsername(next) {
-  if (localStorage.getItem("username")) {
-    next("/");
-  } else {
-    next();
-  }
-}
-
 function beforeFormListView(to, from, next) {
   const username = localStorage.getItem("username");
 
@@ -45,11 +37,11 @@ function beforeFormListView(to, from, next) {
 }
 
 function beforeFormEditView(to, from, next) {
-  requireUsername(next);
-}
-
-function beforeLoginView(to, from, next) {
-  requireUsername(next);
+  if (!localStorage.getItem("username")) {
+    next("/login");
+  } else {
+    next();
+  }
 }
 
 function beforeFormView(to, from, next) {
@@ -93,8 +85,7 @@ export default new Router({
     {
       name: "LoginView",
       path: "/login",
-      component: LoginView,
-      beforeEnter: beforeLoginView
+      component: LoginView
     },
     { path: "/signin", redirect: "/login" },
     {

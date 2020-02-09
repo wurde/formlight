@@ -2,18 +2,46 @@
   <div id="home" class="page">
     <Header />
     <FormListLink />
-
-    <div v-if="error" class="text-error">
-      {{error}}
-    </div>
-
     <FormTitleHeader />
 
-    <div class="text-align-right float-right" v-on:toggleIsEditing="toggleIsEditing" v-bind:isEditing="isEditing">
-      <i v-show="isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-file-alt icon" tabindex="0"></i>
-      <i v-show="!isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-edit icon" tabindex="0"></i>
+    <div class="row py-0">
+      <div class="col-50">
+        <EditModeLink />
+      </div>
+
+      <div class="col-50 d-flex justify-content-flex-end">
+        <nav>
+          <router-link :to="linkToSubmissions" tabindex="0">See submissions</router-link>
+        </nav>
+      </div>
     </div>
-    <Main v-bind:isEditing="isEditing" />
+
+    <section class="form-section">
+      <div v-if="isLoading">
+        Loading...
+      </div>
+
+      <div v-if="!isLoading">
+        <div v-show="error" class="errors">{{error}}</div>
+        <div v-show="alert" class="alert">{{alert}}</div>
+
+        <form @submit.prevent="submitForm">
+          <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
+            <label v-bind:for="'submit-field-' + index"
+                  v-bind:class="{ 'text-danger':  hasError}">{{ field.label }}</label>
+            <input v-bind:id="'submit-field-' + index"
+                  v-bind:type="field.type" v-bind:name="fieldName(field.label)"
+                  v-model="form.answers[index]"
+                  v-bind:class="{ 'input-danger': hasError }" />
+          </div>
+
+          <button type="submit" class="btn-submit" tabindex="0">
+            Submit
+          </button>
+        </form>
+
+      </div>
+    </section>
   </div>
 </template>
 
@@ -21,7 +49,7 @@
 import Header from '../components/Header.vue';
 import FormListLink from '../components/FormListLink.vue';
 import FormTitleHeader from '../components/FormTitleHeader.vue';
-import Main from '../components/Main.vue';
+import EditModeLink from '../components/EditModeLink.vue';
 import config from '../config';
 import axios from 'axios';
 
@@ -30,44 +58,66 @@ const backendUrl = config[env].backendUrl;
 
 export default {
   name: "FormView",
-  // Tip: avoid mistake of passing an array to "components".
   components: {
     Header,
     FormListLink,
     FormTitleHeader,
-    Main
+    EditModeLink,
   },
   data: function() {
     return {
-      username: localStorage.getItem('username'),
-      formTitle: localStorage.getItem('formTitle'),
-      isEditing: localStorage.getItem("isEditing") == "true" || false,
+      isLoading: false,
+      form: {},
+      alert: null,
       error: null
     }
   },
+  computed: {
+    hasError: function() {
+      return this.error !== null ? true : false;
+    },
+    linkToSubmissions: function() {
+      return "/forms/" + this.$route.params.id + "/submissions"
+    }
+  },
   methods: {
-    goBack() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-    },
-    toggleIsEditing() {
-      localStorage.setItem("isEditing", !this.isEditing)
-      this.isEditing = !this.isEditing
-    },
     fetchForm() {
+      this.form = this.error = this.alert = null;
+      this.isLoading = true;
+
       axios.get(backendUrl + `/forms/${this.$route.params.id}`)
       .then(res => {
+        this.isLoading = false;
         this.form = res.data;
       }).catch(err => {
-        alert(err);
+        this.isLoading = false;
+        this.error = err.response.data.message;
       })
+    },
+    submitForm: function() {
+      axios.post(backendUrl + `/forms/${this.$route.params.id}/submissions`, this.form)
+      .then(() => {
+        this.error = null
+        this.alert = 'Successfully sent answers!'
+      })
+      .catch(err => {
+        this.alert = null
+        this.error = `Error: ${err.response.data.message}`;
+      })
+    },
+    fieldName: function(label) {
+      return label.replace(/ /g, '-').toLowerCase()
     }
   },
   created() {
-    localStorage.setItem("isEditing", this.isEditing);
     this.fetchForm();
+  },
+  directives: {
+    focus: {
+      inserted: function(element) {
+        element.focus();
+      }
+    }
   }
 }
 </script>
-
-<style scoped>
-</style>

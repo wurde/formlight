@@ -9,11 +9,62 @@
 
     <FormTitleHeader />
 
-    <div class="text-align-right float-right" v-on:toggleIsEditing="toggleIsEditing" v-bind:isEditing="isEditing">
-      <i v-show="isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-file-alt icon" tabindex="0"></i>
-      <i v-show="!isEditing" v-on:click="$emit('toggleIsEditing')" class="fas fa-edit icon" tabindex="0"></i>
+    <div class="row py-0">
+      <div class="col-50">
+        <FormModeLink />
+      </div>
+
+      <div class="col-50 d-flex justify-content-flex-end">
+        <nav>
+          <router-link :to="linkToSubmissions" tabindex="0">See submissions</router-link>
+        </nav>
+      </div>
     </div>
-    <Main v-bind:isEditing="isEditing" />
+
+    <section class="form-section">
+      <div v-if="isLoading">
+        Loading...
+      </div>
+
+      <div v-if="!isLoading">
+        <div v-show="error" class="errors">{{error}}</div>
+        <div v-show="alert" class="alert">{{alert}}</div>
+
+        <form @submit.prevent="createOrUpdateForm">
+          <label>Fields</label>
+
+          <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
+            <div class="row">
+              <div class="col d-flex-1">
+                <input v-bind:ref="'update-field-' + index"
+                      v-bind:id="'update-field-' + index"
+                      v-bind:type="field.type"
+                      v-bind:name="fieldName(field.label)"
+                      v-model="form.fields_json[index].label"
+                      v-bind:class="{ 'input-danger': hasError }"
+                      v-focus />
+              </div>
+              <div class="col d-flex-0 d-flex center">
+                <button type="button" v-on:click.prevent="removeField(index, $event)" class="btn-remove-field text-danger py-10 px-20" tabindex="0">
+                  <i class="fa fa-minus-circle"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <button type="button" v-on:click.prevent="addField" class="btn-add" tabindex="0">
+              <i class="fa fa-plus icon"></i>
+            </button>
+          </div>
+
+          <button type="submit" class="btn-submit" tabindex="0">
+            Save changes
+          </button>
+        </form>
+
+      </div>
+    </section>
   </div>
 </template>
 
@@ -21,7 +72,7 @@
 import Header from '../components/Header.vue';
 import FormListLink from '../components/FormListLink.vue';
 import FormTitleHeader from '../components/FormTitleHeader.vue';
-import Main from '../components/Main.vue';
+import FormModeLink from '../components/FormModeLink.vue';
 import config from '../config';
 import axios from 'axios';
 
@@ -34,51 +85,92 @@ export default {
     Header,
     FormListLink,
     FormTitleHeader,
-    Main
+    FormModeLink,
   },
   data: function() {
     return {
-      username: localStorage.getItem('username'),
-      formTitle: localStorage.getItem('formTitle'),
-      isEditing: localStorage.getItem("isEditing") == "true" || false,
+      isLoading: false,
+      form: {},
+      alert: null,
       error: null
     }
   },
+  computed: {
+    hasError: function() {
+      return this.error !== null ? true : false;
+    },
+    linkToSubmissions: function() {
+      return "/forms/" + this.$route.params.id + "/submissions"
+    }
+  },
   methods: {
-    goBack() {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-    },
-    toggleIsEditing() {
-      localStorage.setItem("isEditing", !this.isEditing)
-      this.isEditing = !this.isEditing
-    },
     fetchForm() {
       axios.get(backendUrl + `/forms/${this.$route.params.id}`)
       .then(res => {
         this.form = res.data;
       }).catch(err => {
-        alert(err);
+        this.error = err.response.data.message;
       })
     },
-    removeForm() {
-      const yes = confirm("Are you sure? This action is permanent.")
+    createOrUpdateForm: function() {
+      alert(JSON.stringify(this.form))
+      // // Check if form exists
+      // axios.get(backendURL + '/forms/1')
+      // .then(() => {
+      //   // Update form
+      //   axios.patch(backendURL + '/forms/1', this.form)
+      //   .then(() => {
+      //     this.error = this.alert = null
+      //     this.alert = 'Successfully saved changes.'
+      //   })
+      //   .catch(err => {
+      //     this.alert = null
+      //     this.error = `Error: ${err.response.data.message}`;
+      //   })
 
-      if (yes) {
-        axios.delete(backendUrl + `/forms/${this.$route.params.id}`)
-        .then(() => {
-          this.$router.push('/forms');
-        }).catch(err => {
-          this.error = err.response.data.message;
-        })
+      // }).catch(() => {
+      //   // Create new form
+      //   axios.post(backendURL + '/forms', this.form)
+      //   .then(() => {
+      //     this.error = this.alert = null
+      //     this.alert = 'Successfully saved changes.'
+      //   })
+      //   .catch(err => {
+      //     this.alert = null
+      //     this.error = `Error: ${err.response.data.message}`;
+      //   })
+      // })
+    },
+    addField: function() {
+      this.form.fields_json = this.form.fields_json || [];
+      this.alert = '';
+
+      const length = this.form.fields_json.length
+      const lastField = this.form.fields_json[length - 1]
+      if (lastField && lastField.label.length == 0) {
+        document.getElementById('update-field-' + (length - 1)).focus();
+        return
       }
+
+      this.form.fields_json.push({ 'type': 'text', 'label': '' })
+    },
+    removeField: function(index) {
+      this.alert = '';
+      this.form.fields_json.splice(index, 1)
+    },
+    fieldName: function(label) {
+      return label.replace(/ /g, '-').toLowerCase()
     }
   },
   created() {
-    localStorage.setItem("isEditing", this.isEditing);
     this.fetchForm();
+  },
+  directives: {
+    focus: {
+      inserted: function(element) {
+        element.focus();
+      }
+    }
   }
 }
 </script>
-
-<style scoped>
-</style>

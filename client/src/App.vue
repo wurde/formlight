@@ -83,10 +83,6 @@ label {
   font-weight: bold;
 }
 
-nav {
-  margin: 20px 0px;
-}
-
 a {
   text-decoration: underline;
   color: inherit;
@@ -176,7 +172,7 @@ table td,th {
 }
 
 .icon {
-  font-size: 32px;
+  font-size: 18px;
   padding: 10px 16px;
   cursor: pointer;
   outline: none;
@@ -195,6 +191,9 @@ table td,th {
 }
 .col-90 {
   width: 90%;
+}
+.col-50 {
+  width: 50%;
 }
 .col-10 {
   width: 10%;
@@ -244,6 +243,9 @@ table td,th {
 }
 .justify-content-center {
   justify-content: center;
+}
+.justify-content-flex-end {
+  justify-content: flex-end;
 }
 .align-self-flex-end {
   align-self: flex-end;
