@@ -34,43 +34,6 @@ class SubmissionsController {
       res.status(500).json({ message: "Internal Server Error" });
     }
   }
-
-  static async show(req, res) {
-    try {
-      const submission = await Submission.find(req.params.id);
-      res.status(200).json(submission);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  }
-
-  static async update(req, res) {
-    try {
-      if (req.body.answers_json) {
-        const [id] = await Submission.update(req.params.id, {
-          answers_json: req.body.answers_json
-        });
-      }
-
-      const submission = await Submission.find(req.params.id);
-
-      res.status(200).json(submission);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  }
-
-  static async remove(req, res) {
-    try {
-      await Submission.destroy(req.params.id);
-      res.status(200).json();
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ message: "Internal Server Error" });
-    }
-  }
 }
 
 /**

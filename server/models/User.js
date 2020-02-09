@@ -17,10 +17,6 @@ const table = 'users';
  */
 
 class User {
-  static all() {
-    return db(table);
-  }
-
   static async create(params) {
     if (!await this.uniqueUsername(params.username)) {
       const err = new Error()
@@ -35,23 +31,6 @@ class User {
     return db(table)
       .where({ username })
       .first();
-  }
-
-  static update(username, params) {
-    return db(table)
-      .where({ username })
-      .first()
-      .update(params);
-  }
-
-  static destroy(username) {
-    return db(table)
-      .where({ username })
-      .del();
-  }
-
-  static clearAll() {
-    return db(table).truncate();
   }
 
   /**

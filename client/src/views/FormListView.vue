@@ -1,5 +1,7 @@
 <template>
   <div id="form-list" class="page" :key="componentKey">
+    <Header />
+
     <h1>Forms</h1>
 
     <div class="row">
@@ -28,6 +30,7 @@
 </template>
 
 <script>
+import Header from '../components/Header.vue';
 import axios from "axios";
 import config from "../config";
 
@@ -36,6 +39,9 @@ const backendUrl = config[env].backendUrl;
 
 export default {
   name: "FormListView",
+  components: {
+    Header
+  },
   data: function() {
     return {
       componentKey: 0,
