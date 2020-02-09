@@ -12,7 +12,7 @@ class SubmissionsController {
     try {
       const form = await Form.find(req.params.form_id);
       const submissions = await Submission.all(form.title);
-      res.status(200).json(submissions);
+      res.status(200).json({submissions, form});
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Internal Server Error" });

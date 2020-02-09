@@ -10,6 +10,7 @@ import FormEditView from "../views/FormEditView.vue";
 import FormView from "../views/FormView.vue";
 import LoginView from "../views/LoginView.vue";
 import NotFoundView from "../views/NotFoundView.vue";
+import SubmissionsView from "../views/SubmissionsView.vue";
 
 /**
  * Mount plugin
@@ -36,15 +37,7 @@ function beforeFormListView(to, from, next) {
   }
 }
 
-function beforeFormEditView(to, from, next) {
-  if (!localStorage.getItem("username")) {
-    next("/login");
-  } else {
-    next();
-  }
-}
-
-function beforeFormView(to, from, next) {
+function requireUsername(to, from, next) {
   if (!localStorage.getItem("username")) {
     next("/login");
   } else {
@@ -74,13 +67,19 @@ export default new Router({
       name: "FormEditView",
       path: "/forms/:id/edit",
       component: FormEditView,
-      beforeEnter: beforeFormEditView
+      beforeEnter: requireUsername
     },
     {
       name: "FormView",
       path: "/forms/:id",
       component: FormView,
-      beforeEnter: beforeFormView
+      beforeEnter: requireUsername
+    },
+    {
+      name: "SubmissionsView",
+      path: "/forms/:id/submissions",
+      component: SubmissionsView,
+      beforeEnter: requireUsername
     },
     {
       name: "LoginView",

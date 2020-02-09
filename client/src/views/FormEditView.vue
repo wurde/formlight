@@ -2,11 +2,6 @@
   <div id="home" class="page">
     <Header />
     <FormListLink />
-
-    <div v-if="error" class="text-error">
-      {{error}}
-    </div>
-
     <FormTitleHeader />
 
     <div class="row py-0">
