@@ -182,10 +182,6 @@ table td,th {
   text-shadow: 0 5px 30px #EEC480;
 }
 
-.row {
-  display: flex;
-  padding: 10px 0px;
-}
 .col {
   width: 100%;
 }

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <div class="row py-0">
+    <Row class="py-0">
       <div class="col-90 d-flex-1">
         <Heading type="h1" class="form-title" v-bind:text="formTitle" />
       </div>
@@ -10,7 +10,7 @@
           <i class="fa fa-trash"></i>
         </button>
       </div>
-    </div>
+    </Row>
 
     <hr/>
   </header>
@@ -18,6 +18,7 @@
 
 <script>
 import Heading from "../components/Heading.vue";
+import Row from "../components/Row.vue";
 import config from "../config";
 import axios from "axios";
 
@@ -27,7 +28,8 @@ const backendUrl = config[env].backendUrl;
 export default {
   name: "FormTitleHeader",
   components: {
-    Heading
+    Heading,
+    Row,
   },
   data: function() {
     return {

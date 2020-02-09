@@ -4,7 +4,7 @@
     <FormListLink />
     <FormTitleHeader />
 
-    <div class="row py-0">
+    <Row class="py-0">
       <div class="col-50">
         <EditModeLink />
       </div>
@@ -14,7 +14,7 @@
           <router-link :to="linkToSubmissions" tabindex="0">See submissions</router-link>
         </nav>
       </div>
-    </div>
+    </Row>
 
     <section class="form-section">
       <div v-if="isLoading">
@@ -50,6 +50,7 @@ import Header from '../components/Header.vue';
 import FormListLink from '../components/FormListLink.vue';
 import FormTitleHeader from '../components/FormTitleHeader.vue';
 import EditModeLink from '../components/EditModeLink.vue';
+import Row from '../components/Row.vue';
 import config from '../config';
 import axios from 'axios';
 
@@ -63,6 +64,7 @@ export default {
     FormListLink,
     FormTitleHeader,
     EditModeLink,
+    Row,
   },
   data: function() {
     return {

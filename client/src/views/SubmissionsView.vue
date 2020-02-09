@@ -4,14 +4,13 @@
     <FormListLink />
     <FormTitleHeader />
 
-    <div class="row py-0">
-      <div class="col-50"></div>
-      <div class="col-50 d-flex justify-content-flex-end">
+    <Row class="py-0">
+      <div class="col d-flex justify-content-flex-end">
         <nav>
           <router-link :to="linkToForm" tabindex="0">See form</router-link>
         </nav>
       </div>
-    </div>
+    </Row>
 
     <section class="submissions-section">
       <div v-if="isLoading">

@@ -4,7 +4,7 @@
     <FormListLink />
     <FormTitleHeader />
 
-    <div class="row py-0">
+    <Row class="py-0">
       <div class="col-50">
         <FormModeLink />
       </div>
@@ -14,7 +14,7 @@
           <router-link :to="linkToSubmissions" tabindex="0">See submissions</router-link>
         </nav>
       </div>
-    </div>
+    </Row>
 
     <section class="form-section">
       <div v-if="isLoading">
@@ -29,7 +29,7 @@
           <label>Fields</label>
 
           <div v-for="(field, index) in form.fields_json" v-bind:key="fieldName(field.label)" class="form-group">
-            <div class="row">
+            <Row>
               <div class="col d-flex-1">
                 <input v-bind:ref="'update-field-' + index"
                       v-bind:id="'update-field-' + index"
@@ -44,14 +44,14 @@
                   <i class="fa fa-minus-circle"></i>
                 </button>
               </div>
-            </div>
+            </Row>
           </div>
 
-          <div class="row">
+          <Row>
             <button type="button" v-on:click.prevent="addField" class="btn-add" tabindex="0">
               <i class="fa fa-plus icon"></i>
             </button>
-          </div>
+          </Row>
 
           <button type="submit" class="btn-submit" tabindex="0">
             Save changes
@@ -64,10 +64,11 @@
 </template>
 
 <script>
-import Header from '../components/Header.vue';
 import FormListLink from '../components/FormListLink.vue';
-import FormTitleHeader from '../components/FormTitleHeader.vue';
 import FormModeLink from '../components/FormModeLink.vue';
+import FormTitleHeader from '../components/FormTitleHeader.vue';
+import Header from '../components/Header.vue';
+import Row from '../components/Row.vue';
 import config from '../config';
 import axios from 'axios';
 
@@ -77,10 +78,11 @@ const backendUrl = config[env].backendUrl;
 export default {
   name: "FormEditView",
   components: {
-    Header,
     FormListLink,
-    FormTitleHeader,
     FormModeLink,
+    FormTitleHeader,
+    Header,
+    Row,
   },
   data: function() {
     return {

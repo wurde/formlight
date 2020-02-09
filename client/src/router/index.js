@@ -22,21 +22,6 @@ Vue.use(Router);
  * Define navigation guards
  */
 
-function beforeFormListView(to, from, next) {
-  const username = localStorage.getItem("username");
-
-  if (!username) {
-    next("/login");
-  } else {
-    const formId = localStorage.getItem("form");
-    if (formId) {
-      next(`/forms/${formId}`);
-    } else {
-      next();
-    }
-  }
-}
-
 function requireUsername(to, from, next) {
   if (!localStorage.getItem("username")) {
     next("/login");
@@ -61,7 +46,7 @@ export default new Router({
       name: "FormListView",
       path: "/forms",
       component: FormListView,
-      beforeEnter: beforeFormListView
+      beforeEnter: requireUsername
     },
     {
       name: "FormEditView",

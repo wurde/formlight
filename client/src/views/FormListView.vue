@@ -3,17 +3,17 @@
     <Header />
     <Heading type="h1" text="Forms" />
 
-    <div class="row">
+    <Row>
       <ul class="list-style-none">
         <li v-for="form in forms" :key="form.id">
-          <div class="row">
+          <Row>
             <a href="#" @click="() => clickFormLink(form)">{{form.title}}</a>
-          </div>
+          </Row>
         </li>
       </ul>
-    </div>
+    </Row>
 
-    <div class="row">
+    <Row>
       <form @submit.prevent="createForm" method="post">
         <div v-if="error" class="text-error">
           {{error}}
@@ -24,13 +24,14 @@
           <i class="fa fa-plus icon"></i>
         </button>
       </form>
-    </div>
+    </Row>
   </div>
 </template>
 
 <script>
 import Heading from "../components/Heading.vue";
 import Header from "../components/Header.vue";
+import Row from "../components/Row.vue";
 import axios from "axios";
 import config from "../config";
 
@@ -42,6 +43,7 @@ export default {
   components: {
     Heading,
     Header,
+    Row,
   },
   data: function() {
     return {
