@@ -10,7 +10,7 @@ const Submission = require('../models/Submission');
 class FormsController {
   static async index(req, res) {
     try {
-      const forms = await Form.all();
+      const forms = await Form.allByUsername(req.query.username);
       res.status(200).json(forms);
     } catch (err) {
       console.error(err);

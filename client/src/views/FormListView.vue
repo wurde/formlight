@@ -55,7 +55,9 @@ export default {
     fetchForms() {
       this.error = null;
 
-      axios.get(backendUrl + "/forms")
+      axios.get(backendUrl + "/forms", {
+        params: { username: this.username }
+      })
       .then(res => {
         this.forms = res.data;
       }).catch(err => {

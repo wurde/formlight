@@ -17,8 +17,8 @@ const table = 'forms';
  */
 
 class Form {
-  static all() {
-    return db(table);
+  static allByUsername(username) {
+    return db(table).where({ username });
   }
 
   static async create(params) {
