@@ -1,7 +1,7 @@
 <template>
   <main id="login" class="page">
     <div class="container justify-content-center text-align-center">
-      <h1>Login</h1>
+      <Heading type="h1" text="Login" />
 
       <form @submit="loginForm" method="post">
         <div v-if="error" class="text-error">
@@ -18,14 +18,18 @@
 </template>
 
 <script>
-import axios from "axios";
+import Heading from "../components/Heading.vue";
 import config from "../config";
+import axios from "axios";
 
 const env = process.env.NODE_ENV;
 const backendURL = config[env].backendUrl;
 
 export default {
   name: "LoginView",
+  components: {
+    Heading
+  },
   data: () => {
     return {
       "username": '',
