@@ -71,6 +71,7 @@ export default {
         username: this.username,
         title: this.title
       }).then(() => {
+        this.title = '';
         this.fetchForms();
       }).catch(err => {
         this.error = err.response.data.message;
