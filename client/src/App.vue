@@ -277,12 +277,18 @@ table td,th {
 </style>
 
 <style scoped>
+.router-anim-enter {
+  transform: translateY(50px);
+  opacity: 0;
+}
+.router-anim-leave {
+  transform: translateY(-50px);
+  opacity: 0;
+}
 .router-anim-enter-active {
-  animation: fadeInDown 1s;
-  animation-duration: 1s;
+  transition: all .3s ease;
 }
 .router-anim-leave-active {
-  animation: fadeOutDown 1s;
-  animation-duration: 0.4s;
+  transition: all .8s cubic-bezier(1.0, 0.5, 0.8, 1.0);
 }
 </style>
