@@ -16,6 +16,6 @@ describe("Form", () => {
     cy.get("button[type='submit']").click();
 
     // Remove form
-    cy.get("button.btn-remove").click();
+    cy.get("button.btn-remove-form").click();
   });
 });

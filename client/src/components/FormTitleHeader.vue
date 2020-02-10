@@ -6,7 +6,7 @@
       </div>
 
       <div class="col-10 d-flex-0 d-flex justify-content-center align-self-flex-end">
-        <button type="button" v-on:click.prevent="removeForm(index, $event)" class="btn-remove text-danger py-10 px-20" tabindex="0">
+        <button type="button" v-on:click.prevent="removeForm(index, $event)" class="btn-remove btn-remove-form text-danger py-10 px-20" tabindex="0">
           <i class="fa fa-trash"></i>
         </button>
       </div>
