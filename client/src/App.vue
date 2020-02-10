@@ -225,11 +225,6 @@ table td,th {
   padding: 0;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-}
 .justify-content-center {
   justify-content: center;
 }

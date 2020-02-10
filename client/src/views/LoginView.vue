@@ -1,6 +1,6 @@
 <template>
   <main id="login" class="page">
-    <div class="container justify-content-center text-align-center">
+    <Container class="justify-content-center text-align-center">
       <Heading type="h1" text="Login" />
 
       <form @submit="loginForm" method="post">
@@ -11,11 +11,12 @@
         </div>
         <button type="submit">Enter</button>
       </form>
-    </div>
+    </Container>
   </main>
 </template>
 
 <script>
+import Container from "../components/Container.vue";
 import Heading from "../components/Heading.vue";
 import TextError from "../components/TextError.vue";
 import config from "../config";
@@ -27,6 +28,7 @@ const backendURL = config[env].backendUrl;
 export default {
   name: "LoginView",
   components: {
+    Container,
     Heading,
     TextError,
   },
