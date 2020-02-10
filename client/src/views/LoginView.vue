@@ -4,9 +4,7 @@
       <Heading type="h1" text="Login" />
 
       <form @submit="loginForm" method="post">
-        <div v-if="error" class="text-error">
-          {{error}}
-        </div>
+        <TextError v-bind:error="error" />
 
         <div class="input-group">
           <input id="input-username" type="text" v-model="username" placeholder="Username" autofocus />
@@ -19,6 +17,7 @@
 
 <script>
 import Heading from "../components/Heading.vue";
+import TextError from "../components/TextError.vue";
 import config from "../config";
 import axios from "axios";
 
@@ -28,7 +27,8 @@ const backendURL = config[env].backendUrl;
 export default {
   name: "LoginView",
   components: {
-    Heading
+    Heading,
+    TextError,
   },
   data: () => {
     return {

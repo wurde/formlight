@@ -113,10 +113,6 @@ table td,th {
   padding: 5px;
 }
 
-.text-error {
-  color: red;
-}
-
 .form-section {
   padding: 15px;
 }
