@@ -1,4 +1,4 @@
-describe.only("Form", () => {
+describe("Form", () => {
   beforeEach(() => {
     localStorage.clear();
     cy.login("Andy");
