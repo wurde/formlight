@@ -40,7 +40,7 @@
                       v-focus />
               </div>
               <div class="col d-flex-0 d-flex center">
-                <button type="button" v-on:click.prevent="removeField(index, $event)" class="btn-remove-field text-danger py-10 px-20" tabindex="0">
+                <button type="button" v-on:click.prevent="removeField(index, $event)" class="btn-remove btn-remove-field text-danger py-10 px-20" tabindex="0">
                   <i class="fa fa-minus-circle"></i>
                 </button>
               </div>

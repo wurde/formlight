@@ -148,10 +148,10 @@ table td,th {
   color: #FFF;
 }
 
-.btn-remove-field {
+.btn-remove {
   color: #2c3e50;
 }
-.btn-remove-field:focus, .btn-remove-field:hover {
+.btn-remove:focus, .btn-remove:hover {
   color: red;
 }
 

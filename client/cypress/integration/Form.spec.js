@@ -1,17 +1,21 @@
-describe("Form", () => {
+describe.only("Form", () => {
   beforeEach(() => {
     localStorage.clear();
     cy.login("Andy");
   });
 
-  it("has ability to set form title", () => {
-    cy.visit("/");
-    cy.get("main");
-    cy.contains("See submissions").should("be.visible");
-    cy.get("a-see-form").should("be.hidden");
+  it("has the ability to add new forms", () => {
+    cy.url().should("include", "/forms");
+    cy.get("input[name='title']").type("New Form");
+    cy.get("button[type='submit']").click();
+    cy.contains("New Form").click();
+    cy.wait(500);
 
-    cy.contains("See submissions").click();
-    cy.contains("See submissions").should("be.hidden");
-    cy.get(".a-see-form").should("be.visible");
+    cy.get("h1").contains("New Form");
+    cy.get("input").type("Favorite color?");
+    cy.get("button[type='submit']").click();
+
+    // Remove form
+    cy.get("button.btn-remove").click();
   });
 });
