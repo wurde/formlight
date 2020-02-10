@@ -40,7 +40,6 @@ class FormsController {
   static async show(req, res) {
     try {
       const form = await Form.find(req.params.id);
-      console.log({ form });
       res.status(200).json(form);
     } catch (err) {
       console.error(err);

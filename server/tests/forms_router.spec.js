@@ -7,6 +7,7 @@
 const app = require('../index');
 const request = require('supertest');
 const Form = require('../models/Form');
+const User = require('../models/User');
 
 /**
  * Assertions
@@ -14,15 +15,24 @@ const Form = require('../models/Form');
 
 describe('forms_router.js', () => {
   beforeEach(async () => {
+    let user = await User.find("Andy");
+
+    if (!user) {
+      const [id] = await User.create({
+        username: "Andy"
+      });
+    }
     await Form.clearAll()
     await Form.create({
       title: "Signin Form",
+      username: "Andy",
       fields_json: '[{"label":"username"},{"label":"password"}]'
-    })
+    });
     await Form.create({
       title: "Favorite Food",
+      username: "Andy",
       fields_json: '[{"label":"name"}]'
-    })
+    });
   })
 
   it("process.env.NODE_ENV == 'test'", () => {
@@ -31,8 +41,9 @@ describe('forms_router.js', () => {
 
   it("GET /forms", () => {
     return request(app).get('/forms')
-      .expect(200)
-      .expect('Content-Type', /json/)
+    .query({ username: "Andy" })
+    .expect(200)
+    .expect('Content-Type', /json/)
   })
 
   it("POST /forms - missing request body", () => {
@@ -53,7 +64,7 @@ describe('forms_router.js', () => {
   it("POST /forms", () => {
     return request(app)
       .post("/forms")
-      .send({ title: "TestFormAdded" })
+      .send({ username: "Andy", title: "TestFormAdded" })
       .expect(200)
       .expect("Content-Type", /json/)
   })
