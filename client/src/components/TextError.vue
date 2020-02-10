@@ -14,5 +14,6 @@ export default {
 <style scoped>
 .text-error {
   color: red;
+  font-weight: bold;
 }
 </style>

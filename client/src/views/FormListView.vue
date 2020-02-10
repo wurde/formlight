@@ -15,9 +15,7 @@
 
     <Row>
       <form @submit.prevent="createForm" method="post">
-        <div v-if="error" class="text-error">
-          {{error}}
-        </div>
+        <TextError v-bind:error="error" />
 
         <input type="text" name="title" placeholder="Add a new form" v-model="title" />
         <button type="submit" class="btn-add" tabindex="0">
@@ -32,6 +30,7 @@
 import Heading from "../components/Heading.vue";
 import Header from "../components/Header.vue";
 import Row from "../components/Row.vue";
+import TextError from "../components/TextError.vue";
 import axios from "axios";
 import config from "../config";
 
@@ -44,6 +43,7 @@ export default {
     Heading,
     Header,
     Row,
+    TextError,
   },
   data: function() {
     return {

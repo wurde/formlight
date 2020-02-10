@@ -22,7 +22,7 @@
       </div>
 
       <div v-if="!isLoading">
-        <div v-show="error" class="errors">{{error}}</div>
+        <TextError v-bind:error="error" />
         <div v-show="alert" class="alert">{{alert}}</div>
 
         <form @submit.prevent="updateForm">
@@ -69,6 +69,7 @@ import FormModeLink from '../components/FormModeLink.vue';
 import FormTitleHeader from '../components/FormTitleHeader.vue';
 import Header from '../components/Header.vue';
 import Row from '../components/Row.vue';
+import TextError from "../components/TextError.vue";
 import config from '../config';
 import axios from 'axios';
 
@@ -83,6 +84,7 @@ export default {
     FormTitleHeader,
     Header,
     Row,
+    TextError,
   },
   data: function() {
     return {

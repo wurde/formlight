@@ -128,9 +128,6 @@ table td,th {
   font-weight: bold;
   padding-bottom: 10px;
 }
-.alert-error {
-  color: red;
-}
 
 .text-danger {
   color: red;

@@ -17,9 +17,7 @@
         Loading...
       </div>
 
-      <div v-if="error" class="alert-error">
-        {{error}}
-      </div>
+      <TextError v-bind:error="error" />
 
       <div class="display">
         <div v-if="submissions.length > 0">
@@ -46,6 +44,7 @@ import Heading from '../components/Heading.vue';
 import Header from '../components/Header.vue';
 import FormListLink from '../components/FormListLink.vue';
 import FormTitleHeader from '../components/FormTitleHeader.vue';
+import TextError from "../components/TextError.vue";
 import config from '../config';
 import axios from 'axios';
 
@@ -59,6 +58,7 @@ export default {
     Header,
     FormListLink,
     FormTitleHeader,
+    TextError,
   },
   data: function() {
     return {
