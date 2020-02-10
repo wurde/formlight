@@ -1,6 +1,6 @@
 {
   "name": "formlight",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A lightweight Form Builder web app using Vue.js.",
   "private": true,
   "scripts": {
