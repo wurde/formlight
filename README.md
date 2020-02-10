@@ -2,6 +2,10 @@
 
 A lightweight Form Builder web app using Vue.js.
 
+## Preview
+
+![GIF of Form Light](assets/output.gif)
+
 ## Getting Started
 
 Quickly get a development version running locally.

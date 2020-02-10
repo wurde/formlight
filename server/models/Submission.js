@@ -39,7 +39,7 @@ class Submission {
   }
 
   static removeByForm(form_title) {
-    return db(table).where({ form_title }).truncate();
+    return db(table).where({ form_title }).del();
   }
 
   static clearAll() {
